@@ -1,1 +1,58 @@
-{% extends 'base.html' %}{% block content %}<div class="hero compact"><div><span>QUICK LOG</span><h2>Record what you ate.</h2><p>Choose a food and serving size. Python calculates the nutrition automatically.</p></div></div><div class="form-card"><form method="post"><label>Meal type<select name="meal_type"><option>Breakfast</option><option>Lunch</option><option>Dinner</option><option>Snack</option></select></label><label>Food<select name="food">{% for f in foods %}<option value="{{ f.name.lower() }}">{{ f.name }} — {{ f.calories:g }} kcal</option>{% endfor %}</select></label><label>Quantity<input name="quantity" type="number" min="0.25" step="0.25" value="1"></label><button class="btn primary" type="submit">Add meal</button></form></div><div class="explain"><b>How the calculation works</b><p>Python reads the food's values from <code>foods.csv</code>, multiplies each value by the quantity, then saves the result in <code>meals.csv</code>.</p></div>{% endblock %}
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="hero compact">
+    <div>
+        <span>QUICK LOG</span>
+        <h2>Record what you ate.</h2>
+        <p>Choose a food and serving size. Python calculates the nutrition automatically.</p>
+    </div>
+</div>
+
+<div class="form-card">
+    <form method="post">
+
+        <label>
+            Meal type
+            <select name="meal_type">
+                <option>Breakfast</option>
+                <option>Lunch</option>
+                <option>Dinner</option>
+                <option>Snack</option>
+            </select>
+        </label>
+
+        <label>
+            Food
+            <select name="food">
+                {% for f in foods %}
+                <option value="{{ f.name.lower() }}">
+                    {{ f.name }} — {{ "%.0f"|format(f.calories) }} kcal
+                </option>
+                {% endfor %}
+            </select>
+        </label>
+
+        <label>
+            Quantity
+            <input name="quantity" type="number" min="0.25" step="0.25" value="1">
+        </label>
+
+        <button class="btn primary" type="submit">
+            Add meal
+        </button>
+
+    </form>
+</div>
+
+<div class="explain">
+    <b>How the calculation works</b>
+    <p>
+        Python reads the food's values from <code>foods.csv</code>,
+        multiplies each value by the quantity, then saves the result
+        in <code>meals.csv</code>.
+    </p>
+</div>
+
+{% endblock %}
