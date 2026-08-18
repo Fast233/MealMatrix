@@ -1,1 +1,24 @@
-{% extends 'base.html' %}{% block content %}<form class="search" method="get"><input name="q" value="{{ query }}" placeholder="Search 50+ foods..."><button class="btn primary">Search</button></form><div class="food-grid">{% for f in foods %}<div class="food"><b>{{ f.name }}</b><small>{{ f.calories:g }} kcal · P {{ f.protein:g }}g · C {{ f.carbs:g }}g · F {{ f.fat:g }}g</small><a href="{{ url_for('add_meal') }}" class="small-btn">Add meal</a></div>{% endfor %}</div>{% endblock %}
+{% extends 'base.html' %}
+{% block content %}
+
+<form class="search" method="get">
+    <input name="q" value="{{ query }}" placeholder="Search 50+ foods...">
+    <button class="btn primary">Search</button>
+</form>
+
+<div class="food-grid">
+    {% for f in foods %}
+    <div class="food">
+        <b>{{ f.name }}</b>
+        <small>
+            {{ "%.0f"|format(f.calories) }} kcal ·
+            P {{ "%.0f"|format(f.protein) }}g ·
+            C {{ "%.0f"|format(f.carbs) }}g ·
+            F {{ "%.0f"|format(f.fat) }}g
+        </small>
+        <a href="{{ url_for('add_meal') }}" class="small-btn">Add meal</a>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
