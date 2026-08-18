@@ -6,7 +6,7 @@
     <div>
         <span>QUICK LOG</span>
         <h2>Record what you ate.</h2>
-        <p>Choose a food and serving size. Python calculates the nutrition automatically.</p>
+        <p>Choose a food and serving size. MealMatrix calculates the nutrition automatically.</p>
     </div>
 </div>
 
@@ -40,19 +40,78 @@
         </label>
 
         <button class="btn primary" type="submit">
-            Add meal
+            Add Meal
         </button>
 
     </form>
 </div>
 
-<div class="explain">
-    <b>How the calculation works</b>
-    <p>
-        Python reads the food's values from <code>foods.csv</code>,
-        multiplies each value by the quantity, then saves the result
-        in <code>meals.csv</code>.
-    </p>
+<div class="form-card custom-food-card">
+    <span>CUSTOM FOOD</span>
+    <h2>Food not in the database?</h2>
+    <p>Add it once and it will be available for future meals.</p>
+
+    <form method="post" action="{{ url_for('add_food') }}">
+
+        <label>
+            Food name
+            <input
+                name="name"
+                type="text"
+                placeholder="e.g. Homemade Paneer Roll"
+                required
+            >
+        </label>
+
+        <label>
+            Calories (kcal)
+            <input
+                name="calories"
+                type="number"
+                min="0"
+                step="0.1"
+                required
+            >
+        </label>
+
+        <label>
+            Protein (g)
+            <input
+                name="protein"
+                type="number"
+                min="0"
+                step="0.1"
+                required
+            >
+        </label>
+
+        <label>
+            Carbohydrates (g)
+            <input
+                name="carbs"
+                type="number"
+                min="0"
+                step="0.1"
+                required
+            >
+        </label>
+
+        <label>
+            Fat (g)
+            <input
+                name="fat"
+                type="number"
+                min="0"
+                step="0.1"
+                required
+            >
+        </label>
+
+        <button class="btn primary" type="submit">
+            + Save Custom Food
+        </button>
+
+    </form>
 </div>
 
 {% endblock %}
