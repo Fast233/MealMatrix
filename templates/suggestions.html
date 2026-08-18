@@ -1,1 +1,27 @@
-{% extends 'base.html' %}{% block content %}<div class="hero compact"><div><span>PERSONALISED COACH</span><h2>Suggestions based on your data.</h2><p>This is intentionally explainable: Python looks at your meal history, identifies simple patterns and chooses a relevant suggestion.</p></div></div><div class="suggest-grid">{% for tip in tips %}<div class="suggest"><b>✦ Insight {{ loop.index }}</b><p>{{ tip }}</p></div>{% endfor %}</div><div class="explain"><b>Viva explanation</b><p><strong>Collect → Analyse → Personalise → Explain.</strong> The program counts repeated foods and meal types, calculates nutrition totals and then uses those patterns to select suggestions. A future version can send these signals to a secure AI API for richer language.</p></div>{% endblock %}
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="hero compact">
+    <div>
+        <span>AI COACH</span>
+        <h2>Personalised suggestions are coming soon.</h2>
+        <p>
+            We're working on smarter meal recommendations based on your
+            nutrition and eating patterns.
+        </p>
+    </div>
+</div>
+
+<div class="coming-soon-card">
+    <div class="coming-icon">✦</div>
+
+    <h2>Coming Soon</h2>
+
+    <p>
+        The Suggestions feature is currently being developed.
+        Check back later for personalised meal insights.
+    </p>
+</div>
+
+{% endblock %}
