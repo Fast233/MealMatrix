@@ -19,10 +19,12 @@ def current_date():
 
 def load_food_database():
     foods = {}
+
     try:
         with open(FOOD_DATABASE_FILE, "r", newline="", encoding="utf-8") as f:
             reader = csv.reader(f)
             next(reader, None)
+
             for row in reader:
                 try:
                     if len(row) == 5:
@@ -35,36 +37,91 @@ def load_food_database():
                         }
                 except ValueError:
                     pass
+
     except FileNotFoundError:
         pass
+
     return foods
+
+
+def save_custom_food(name, calories, protein, carbs, fat):
+    """
+    Add a new food to the existing foods.csv database.
+    The food can then be selected in future meals.
+    """
+    file_exists = os.path.exists(FOOD_DATABASE_FILE)
+
+    with open(FOOD_DATABASE_FILE, "a", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+
+        if not file_exists or os.path.getsize(FOOD_DATABASE_FILE) == 0:
+            writer.writerow([
+                "name",
+                "calories",
+                "protein",
+                "carbs",
+                "fat"
+            ])
+
+        writer.writerow([
+            name.strip().title(),
+            calories,
+            protein,
+            carbs,
+            fat
+        ])
 
 
 def create_files():
     if not os.path.exists(MEALS_FILE):
         with open(MEALS_FILE, "w", newline="", encoding="utf-8") as f:
             csv.writer(f).writerow([
-                "meal_id", "date", "meal_type", "food_item", "quantity",
-                "calories", "protein", "carbs", "fat"
+                "meal_id",
+                "date",
+                "meal_type",
+                "food_item",
+                "quantity",
+                "calories",
+                "protein",
+                "carbs",
+                "fat"
             ])
+
     if not os.path.exists(GOAL_FILE):
         with open(GOAL_FILE, "w", newline="", encoding="utf-8") as f:
-            csv.writer(f).writerows([["weekly_goal"], [0]])
+            csv.writer(f).writerows([
+                ["weekly_goal"],
+                [0]
+            ])
 
 
 def get_meals():
     create_files()
+
     meals = []
+
     with open(MEALS_FILE, "r", newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
+
         for row in reader:
             meals.append(row)
+
     return meals
 
 
 def save_meals(meals):
-    fields = ["meal_id", "date", "meal_type", "food_item", "quantity",
-              "calories", "protein", "carbs", "fat"]
+    fields = [
+        "meal_id",
+        "date",
+        "meal_type",
+        "food_item",
+        "quantity",
+        "calories",
+        "protein",
+        "carbs",
+        "fat"
+    ]
+
     with open(MEALS_FILE, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fields)
         writer.writeheader()
@@ -76,21 +133,35 @@ def get_daily_target():
         with open(GOAL_FILE, "r", newline="", encoding="utf-8") as f:
             rows = list(csv.reader(f))
             return float(rows[1][0]) / 7
+
     except (FileNotFoundError, IndexError, ValueError):
         return 0
 
 
 def save_goal(weekly_goal):
     with open(GOAL_FILE, "w", newline="", encoding="utf-8") as f:
-        csv.writer(f).writerows([["weekly_goal"], [weekly_goal]])
+        csv.writer(f).writerows([
+            ["weekly_goal"],
+            [weekly_goal]
+        ])
 
 
 def nutrition_totals(meals):
-    totals = {"calories": 0, "protein": 0, "carbs": 0, "fat": 0}
+    totals = {
+        "calories": 0,
+        "protein": 0,
+        "carbs": 0,
+        "fat": 0
+    }
+
     for meal in meals:
         for key in totals:
             totals[key] += float(meal[key])
-    return {key: round(value, 1) for key, value in totals.items()}
+
+    return {
+        key: round(value, 1)
+        for key, value in totals.items()
+    }
 
 
 def make_meal(food, meal_type, quantity):
@@ -110,116 +181,375 @@ def make_meal(food, meal_type, quantity):
 @app.route("/")
 def home():
     meals = get_meals()
-    today_meals = [m for m in meals if m["date"] == current_date()]
+
+    today_meals = [
+        m for m in meals
+        if m["date"] == current_date()
+    ]
+
     totals = nutrition_totals(today_meals)
-    return render_template("dashboard.html", page="Dashboard", meals=today_meals,
-                           totals=totals, target=get_daily_target(), today=current_date())
+
+    return render_template(
+        "dashboard.html",
+        page="Dashboard",
+        meals=today_meals,
+        totals=totals,
+        target=get_daily_target(),
+        today=current_date()
+    )
 
 
 @app.route("/add-meal", methods=["GET", "POST"])
 def add_meal():
     foods = load_food_database()
+
     if request.method == "POST":
+
         food_name = request.form.get("food", "").lower()
-        meal_type = request.form.get("meal_type", "Breakfast")
+        meal_type = request.form.get(
+            "meal_type",
+            "Breakfast"
+        )
+
         try:
-            quantity = float(request.form.get("quantity", "1"))
+            quantity = float(
+                request.form.get("quantity", "1")
+            )
+
             if quantity <= 0:
                 raise ValueError
+
         except ValueError:
-            flash("Please enter a valid quantity.", "error")
+            flash(
+                "Please enter a valid quantity.",
+                "error"
+            )
             return redirect(url_for("add_meal"))
+
         if food_name not in foods:
-            flash("Food not found in the database.", "error")
+            flash(
+                "Food not found in the database.",
+                "error"
+            )
             return redirect(url_for("add_meal"))
+
         meals = get_meals()
-        meals.append(make_meal(foods[food_name], meal_type, quantity))
+
+        meals.append(
+            make_meal(
+                foods[food_name],
+                meal_type,
+                quantity
+            )
+        )
+
         save_meals(meals)
-        flash("Meal added successfully.", "success")
+
+        flash(
+            "Meal added successfully.",
+            "success"
+        )
+
         return redirect(url_for("home"))
-    return render_template("add_meal.html", page="Add Meal", foods=sorted(foods.values(), key=lambda x: x["name"]))
+
+    return render_template(
+        "add_meal.html",
+        page="Add Meal",
+        foods=sorted(
+            foods.values(),
+            key=lambda x: x["name"]
+        )
+    )
+
+
+@app.route("/add-food", methods=["POST"])
+def add_food():
+
+    name = request.form.get(
+        "name",
+        ""
+    ).strip()
+
+    try:
+        calories = float(
+            request.form.get(
+                "calories",
+                "0"
+            )
+        )
+
+        protein = float(
+            request.form.get(
+                "protein",
+                "0"
+            )
+        )
+
+        carbs = float(
+            request.form.get(
+                "carbs",
+                "0"
+            )
+        )
+
+        fat = float(
+            request.form.get(
+                "fat",
+                "0"
+            )
+        )
+
+    except ValueError:
+        flash(
+            "Please enter valid nutrition values.",
+            "error"
+        )
+
+        return redirect(
+            url_for("add_meal")
+        )
+
+    if not name:
+        flash(
+            "Please enter a food name.",
+            "error"
+        )
+
+        return redirect(
+            url_for("add_meal")
+        )
+
+    if min(
+        calories,
+        protein,
+        carbs,
+        fat
+    ) < 0:
+
+        flash(
+            "Nutrition values cannot be negative.",
+            "error"
+        )
+
+        return redirect(
+            url_for("add_meal")
+        )
+
+    foods = load_food_database()
+
+    if name.lower() in foods:
+        flash(
+            "That food is already in the database.",
+            "error"
+        )
+
+        return redirect(
+            url_for("add_meal")
+        )
+
+    save_custom_food(
+        name,
+        calories,
+        protein,
+        carbs,
+        fat
+    )
+
+    flash(
+        f"{name.title()} was added to your food database.",
+        "success"
+    )
+
+    return redirect(
+        url_for("add_meal")
+    )
 
 
 @app.route("/meals")
 def meals():
-    all_meals = list(reversed(get_meals()))
-    query = request.args.get("q", "").strip().lower()
+    all_meals = list(
+        reversed(get_meals())
+    )
+
+    query = request.args.get(
+        "q",
+        ""
+    ).strip().lower()
+
     if query:
-        all_meals = [m for m in all_meals if query in m["food_item"].lower() or query in m["meal_type"].lower()]
-    return render_template("meals.html", page="Search Meals", meals=all_meals, query=query)
+        all_meals = [
+            m for m in all_meals
+            if query in m["food_item"].lower()
+            or query in m["meal_type"].lower()
+        ]
+
+    return render_template(
+        "meals.html",
+        page="Search Meals",
+        meals=all_meals,
+        query=query
+    )
 
 
 @app.route("/foods")
 def foods():
-    data = sorted(load_food_database().values(), key=lambda x: x["name"])
-    query = request.args.get("q", "").strip().lower()
+
+    data = sorted(
+        load_food_database().values(),
+        key=lambda x: x["name"]
+    )
+
+    query = request.args.get(
+        "q",
+        ""
+    ).strip().lower()
+
     if query:
-        data = [f for f in data if query in f["name"].lower()]
-    return render_template("foods.html", page="Food Database", foods=data, query=query)
+        data = [
+            f for f in data
+            if query in f["name"].lower()
+        ]
+
+    return render_template(
+        "foods.html",
+        page="Food Database",
+        foods=data,
+        query=query
+    )
 
 
 @app.route("/goal", methods=["GET", "POST"])
 def goal():
+
     if request.method == "POST":
+
         try:
-            weekly = float(request.form["weekly_goal"])
+            weekly = float(
+                request.form["weekly_goal"]
+            )
+
             if weekly < 0:
                 raise ValueError
+
             save_goal(weekly)
-            flash("Weekly goal saved.", "success")
+
+            flash(
+                "Weekly goal saved.",
+                "success"
+            )
+
         except ValueError:
-            flash("Enter a valid non-negative goal.", "error")
-        return redirect(url_for("goal"))
-    return render_template("goal.html", page="Calorie Goal", target=get_daily_target())
+            flash(
+                "Enter a valid non-negative goal.",
+                "error"
+            )
+
+        return redirect(
+            url_for("goal")
+        )
+
+    return render_template(
+        "goal.html",
+        page="Calorie Goal",
+        target=get_daily_target()
+    )
 
 
 @app.route("/report")
 def report():
+
     meals = get_meals()
-    dates = sorted({m["date"] for m in meals}, key=lambda d: datetime.datetime.strptime(d, "%d-%m-%Y"))[-7:]
+
+    dates = sorted(
+        {
+            m["date"]
+            for m in meals
+        },
+        key=lambda d: datetime.datetime.strptime(
+            d,
+            "%d-%m-%Y"
+        )
+    )[-7:]
+
     rows = []
+
     for date in dates:
-        day_meals = [m for m in meals if m["date"] == date]
-        rows.append({"date": date, **nutrition_totals(day_meals)})
-    return render_template("report.html", page="Weekly Report", rows=rows)
+
+        day_meals = [
+            m for m in meals
+            if m["date"] == date
+        ]
+
+        rows.append({
+            "date": date,
+            **nutrition_totals(day_meals)
+        })
+
+    return render_template(
+        "report.html",
+        page="Weekly Report",
+        rows=rows
+    )
 
 
 @app.route("/suggestions")
 def suggestions():
-    meals = get_meals()
-    counts = {}
-    for meal in meals:
-        counts[meal["food_item"]] = counts.get(meal["food_item"], 0) + 1
-    top_food = max(counts, key=counts.get) if counts else None
-    recent = meals[-7:]
-    recent_totals = nutrition_totals(recent)
-    tips = []
-    if not meals:
-        tips.append("Log a few normal meals first. The suggestion system needs your real eating pattern before it can personalise advice.")
-    else:
-        tips.append(f"You record {top_food} most often ({counts[top_food]} time(s)). Consider adding variety around foods you already enjoy.")
-        if len({m['meal_type'] for m in meals}) < 3:
-            tips.append("Your log currently covers a small range of meal types. Logging meals as they happen will make pattern analysis more useful.")
-        tips.append(f"Your latest seven meal records contain {recent_totals['calories']} kcal in total according to the food database.")
-    return render_template("suggestions.html", page="AI Coach", tips=tips, top_food=top_food, meal_count=len(meals))
+
+    # Suggestions are temporarily on hold.
+    # The page remains available and displays
+    # a Coming Soon message.
+
+    return render_template(
+        "suggestions.html",
+        page="AI Coach"
+    )
 
 
 @app.route("/habits")
 def habits():
+
     meals = get_meals()
+
     counts = {}
+
     for m in meals:
-        counts[m["food_item"]] = counts.get(m["food_item"], 0) + 1
-    ranked = sorted(counts.items(), key=lambda x: x[1], reverse=True)[:8]
-    return render_template("habits.html", page="Food Habits", ranked=ranked, meal_count=len(meals))
+        counts[m["food_item"]] = (
+            counts.get(m["food_item"], 0) + 1
+        )
+
+    ranked = sorted(
+        counts.items(),
+        key=lambda x: x[1],
+        reverse=True
+    )[:8]
+
+    return render_template(
+        "habits.html",
+        page="Food Habits",
+        ranked=ranked,
+        meal_count=len(meals)
+    )
 
 
 @app.route("/delete/<meal_id>", methods=["POST"])
 def delete_meal(meal_id):
-    meals = [m for m in get_meals() if m["meal_id"] != meal_id]
+
+    meals = [
+        m for m in get_meals()
+        if m["meal_id"] != meal_id
+    ]
+
     save_meals(meals)
-    flash("Meal removed.", "success")
-    return redirect(request.referrer or url_for("home"))
+
+    flash(
+        "Meal removed.",
+        "success"
+    )
+
+    return redirect(
+        request.referrer
+        or url_for("home")
+    )
 
 
 if __name__ == "__main__":
