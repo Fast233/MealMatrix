@@ -1,27 +1,44 @@
 /* =========================================================
-   MEALMATRIX — MAIN DESIGN SYSTEM
+   MEALMATRIX
+   MAIN DESIGN
+   ========================================================= */
+
+
+/* =========================================================
+   VARIABLES
    ========================================================= */
 
 :root {
+
     --bg: #f5f6f2;
+
     --surface: #ffffff;
-    --surface-soft: #f0f2ec;
+
+    --surface-soft: #eef1eb;
 
     --ink: #172019;
+
     --muted: #707870;
+
     --light-muted: #9aa19a;
 
     --green: #183f2b;
+
     --green-2: #245d3f;
+
     --green-soft: #e2ece4;
 
     --line: #e3e6e0;
 
     --radius: 18px;
+
     --radius-lg: 28px;
 
-    --shadow: 0 10px 30px rgba(20, 35, 25, 0.06);
-    --shadow-hover: 0 16px 38px rgba(20, 35, 25, 0.10);
+    --shadow:
+        0 10px 30px rgba(20, 35, 25, 0.06);
+
+    --shadow-hover:
+        0 16px 38px rgba(20, 35, 25, 0.10);
 }
 
 
@@ -35,11 +52,14 @@
     padding: 0;
 }
 
+
 html {
     scroll-behavior: smooth;
 }
 
+
 body {
+
     font-family:
         Inter,
         -apple-system,
@@ -48,14 +68,18 @@ body {
         sans-serif;
 
     background: var(--bg);
+
     color: var(--ink);
+
     line-height: 1.5;
 }
+
 
 a {
     color: inherit;
     text-decoration: none;
 }
+
 
 button,
 input,
@@ -64,18 +88,15 @@ textarea {
     font: inherit;
 }
 
-img {
-    max-width: 100%;
-    display: block;
-}
-
 
 /* =========================================================
-   APP LAYOUT
+   APP
    ========================================================= */
 
 .app-shell {
+
     min-height: 100vh;
+
     display: flex;
 }
 
@@ -85,20 +106,25 @@ img {
    ========================================================= */
 
 .sidebar {
+
     width: 255px;
+
     min-height: 100vh;
 
     position: fixed;
+
     left: 0;
     top: 0;
     bottom: 0;
 
     display: flex;
+
     flex-direction: column;
 
     padding: 30px 18px 22px;
 
     background: #10291d;
+
     color: white;
 }
 
@@ -106,44 +132,61 @@ img {
 /* BRAND */
 
 .brand {
+
     display: flex;
+
     align-items: center;
+
     gap: 12px;
 
     padding: 0 10px 30px;
 }
 
+
 .brand-mark {
+
     width: 39px;
     height: 39px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
     border-radius: 12px;
 
     background: white;
+
     color: var(--green);
 
     font-size: 20px;
+
     font-weight: 800;
 }
 
+
 .brand-text {
+
     display: flex;
+
     flex-direction: column;
 }
 
+
 .brand-text strong {
+
     font-size: 17px;
+
     letter-spacing: -0.3px;
 }
 
+
 .brand-text span {
+
     margin-top: 2px;
 
     font-size: 8px;
+
     letter-spacing: 1.4px;
 
     color: rgba(255,255,255,.52);
@@ -153,10 +196,13 @@ img {
 /* NAV LABEL */
 
 .nav-label {
+
     padding: 0 12px 10px;
 
     font-size: 9px;
+
     font-weight: 700;
+
     letter-spacing: 1.6px;
 
     color: rgba(255,255,255,.38);
@@ -166,16 +212,23 @@ img {
 /* NAV */
 
 .main-nav {
+
     display: flex;
+
     flex-direction: column;
+
     gap: 5px;
 }
 
+
 .main-nav a {
+
     min-height: 45px;
 
     display: flex;
+
     align-items: center;
+
     gap: 13px;
 
     padding: 0 13px;
@@ -183,39 +236,53 @@ img {
     border-radius: 11px;
 
     font-size: 13px;
+
     font-weight: 500;
 
     color: rgba(255,255,255,.66);
 
     transition:
         background .2s ease,
-        color .2s ease,
-        transform .2s ease;
+        color .2s ease;
 }
+
 
 .main-nav a:hover {
+
     background: rgba(255,255,255,.07);
+
     color: white;
 }
 
+
 .main-nav a.active {
+
     background: rgba(255,255,255,.12);
+
     color: white;
+
     font-weight: 650;
 }
 
+
 .nav-icon {
+
     width: 20px;
 
     display: inline-flex;
+
     align-items: center;
+
     justify-content: center;
 
     font-size: 17px;
+
     color: rgba(255,255,255,.55);
 }
 
+
 .main-nav a.active .nav-icon {
+
     color: white;
 }
 
@@ -223,25 +290,34 @@ img {
 /* SIDEBAR BOTTOM */
 
 .sidebar-bottom {
+
     margin-top: auto;
 
     padding: 17px 12px 3px;
 
-    border-top: 1px solid rgba(255,255,255,.09);
+    border-top:
+        1px solid rgba(255,255,255,.09);
 }
 
+
 .connection {
+
     display: flex;
+
     align-items: center;
+
     gap: 8px;
 
     margin-bottom: 8px;
 
     font-size: 10px;
+
     color: rgba(255,255,255,.66);
 }
 
+
 .connection-dot {
+
     width: 7px;
     height: 7px;
 
@@ -250,8 +326,11 @@ img {
     background: #69c58a;
 }
 
+
 .sidebar-bottom small {
+
     font-size: 9px;
+
     line-height: 1.6;
 
     color: rgba(255,255,255,.33);
@@ -259,11 +338,13 @@ img {
 
 
 /* =========================================================
-   MAIN AREA
+   MAIN
    ========================================================= */
 
 .main-area {
+
     width: calc(100% - 255px);
+
     margin-left: 255px;
 
     min-height: 100vh;
@@ -275,42 +356,58 @@ img {
    ========================================================= */
 
 .topbar {
+
     height: 84px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
     padding: 0 46px;
 
     background: rgba(245,246,242,.94);
 
-    border-bottom: 1px solid rgba(0,0,0,.035);
+    border-bottom:
+        1px solid rgba(0,0,0,.035);
 
     position: sticky;
+
     top: 0;
+
     z-index: 20;
 
     backdrop-filter: blur(12px);
 }
 
+
 .page-heading h1 {
+
     font-size: 22px;
+
     line-height: 1.1;
 
     letter-spacing: -.7px;
 }
 
+
 .page-heading p {
+
     margin-top: 3px;
 
     font-size: 11px;
+
     color: var(--muted);
 }
 
+
 .status {
+
     display: flex;
+
     align-items: center;
+
     gap: 7px;
 
     padding: 8px 12px;
@@ -318,22 +415,24 @@ img {
     border-radius: 30px;
 
     background: white;
-    border: 1px solid var(--line);
+
+    border:
+        1px solid var(--line);
 
     font-size: 10px;
+
     color: var(--muted);
 }
 
+
 .status span {
+
     width: 6px;
     height: 6px;
 
     border-radius: 50%;
-    background: #4a9b68;
-}
 
-.mobile-brand {
-    display: none;
+    background: #4a9b68;
 }
 
 
@@ -342,7 +441,11 @@ img {
    ========================================================= */
 
 .content {
-    width: min(1240px, calc(100% - 92px));
+
+    width: min(
+        1240px,
+        calc(100% - 92px)
+    );
 
     margin: 0 auto;
 
@@ -355,16 +458,20 @@ img {
    ========================================================= */
 
 .dashboard-hero {
+
     min-height: 390px;
 
     display: grid;
-    grid-template-columns: 1.15fr .85fr;
+
+    grid-template-columns:
+        1.15fr .85fr;
 
     gap: 30px;
 
     padding: 48px 54px;
 
     position: relative;
+
     overflow: hidden;
 
     border-radius: var(--radius-lg);
@@ -386,17 +493,23 @@ img {
     box-shadow: var(--shadow);
 }
 
+
 .hero-copy {
+
     position: relative;
+
     z-index: 2;
 
     align-self: center;
 }
 
+
 .eyebrow {
+
     display: inline-block;
 
     font-size: 9px;
+
     font-weight: 800;
 
     letter-spacing: 1.7px;
@@ -404,149 +517,206 @@ img {
     color: var(--muted);
 }
 
+
 .dashboard-hero .eyebrow {
+
     color: rgba(255,255,255,.55);
 }
 
+
 .hero-copy h2 {
+
     margin-top: 12px;
 
-    font-size: clamp(38px, 4vw, 56px);
+    font-size:
+        clamp(38px, 4vw, 56px);
+
     line-height: .98;
 
     letter-spacing: -2.5px;
 }
 
+
 .hero-copy h2 span {
+
     color: #a8d4b4;
 }
 
+
 .hero-copy p {
+
     max-width: 530px;
 
     margin-top: 21px;
 
     font-size: 14px;
+
     line-height: 1.75;
 
     color: rgba(255,255,255,.67);
 }
 
+
 .hero-actions {
+
     display: flex;
+
     align-items: center;
+
     gap: 20px;
 
     margin-top: 27px;
 }
 
+
 .hero-link {
+
     font-size: 12px;
+
     font-weight: 650;
 
     color: rgba(255,255,255,.72);
 }
 
+
 .hero-link:hover {
+
     color: white;
 }
 
 
-/* HERO VISUAL */
+/* =========================================================
+   HERO VISUAL
+   ========================================================= */
 
 .hero-visual {
+
     position: relative;
 
     min-height: 290px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 }
 
+
 .orb {
+
     position: absolute;
 
     border-radius: 50%;
-
-    filter: blur(.2px);
 }
 
+
 .orb-one {
+
     width: 210px;
+
     height: 210px;
 
-    background: rgba(164,211,175,.12);
+    background:
+        rgba(164,211,175,.12);
 
     top: 5px;
+
     right: 40px;
 }
 
+
 .orb-two {
+
     width: 120px;
+
     height: 120px;
 
-    background: rgba(255,255,255,.07);
+    background:
+        rgba(255,255,255,.07);
 
     bottom: 15px;
+
     left: 15px;
 }
 
 
-/* NUTRITION CARD */
+/* =========================================================
+   NUTRITION CARD
+   ========================================================= */
 
 .nutrition-card {
+
     width: 270px;
 
     position: relative;
+
     z-index: 3;
 
     padding: 23px;
 
-    border: 1px solid rgba(255,255,255,.14);
+    border:
+        1px solid rgba(255,255,255,.14);
+
     border-radius: 21px;
 
-    background: rgba(255,255,255,.105);
+    background:
+        rgba(255,255,255,.105);
 
     backdrop-filter: blur(18px);
 
-    box-shadow: 0 25px 60px rgba(0,0,0,.16);
+    box-shadow:
+        0 25px 60px rgba(0,0,0,.16);
 }
 
+
 .nutrition-top {
+
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
     font-size: 8px;
+
     letter-spacing: 1.4px;
 
     color: rgba(255,255,255,.5);
 }
 
+
 .mini-status {
+
     padding: 4px 7px;
 
     border-radius: 20px;
 
-    background: rgba(166,221,180,.14);
+    background:
+        rgba(166,221,180,.14);
 
     color: #a8d4b4;
 
     font-size: 7px;
 }
 
+
 .nutrition-number {
+
     margin-top: 17px;
 
     font-size: 42px;
+
     font-weight: 750;
 
     letter-spacing: -2px;
 }
 
+
 .nutrition-number small {
+
     font-size: 11px;
+
     font-weight: 500;
 
     letter-spacing: 0;
@@ -554,7 +724,9 @@ img {
     color: rgba(255,255,255,.5);
 }
 
+
 .nutrition-label {
+
     margin-top: -4px;
 
     font-size: 9px;
@@ -562,12 +734,17 @@ img {
     color: rgba(255,255,255,.45);
 }
 
+
 .nutrition-bars {
+
     margin-top: 22px;
 }
 
-.nutrition-bars > div:not(.bar) {
+
+.nutrition-line {
+
     display: flex;
+
     justify-content: space-between;
 
     margin-top: 9px;
@@ -577,11 +754,15 @@ img {
     color: rgba(255,255,255,.55);
 }
 
-.nutrition-bars b {
+
+.nutrition-line b {
+
     color: white;
 }
 
+
 .bar {
+
     height: 4px;
 
     margin-top: 5px;
@@ -590,11 +771,15 @@ img {
 
     border-radius: 10px;
 
-    background: rgba(255,255,255,.1);
+    background:
+        rgba(255,255,255,.1);
 }
 
+
 .bar i {
+
     display: block;
+
     height: 100%;
 
     border-radius: inherit;
@@ -603,17 +788,42 @@ img {
 }
 
 
-/* MEAL COUNT */
+.protein-bar {
+
+    width: 65%;
+}
+
+
+.carbs-bar {
+
+    width: 80%;
+}
+
+
+.fat-bar {
+
+    width: 45%;
+}
+
+
+/* =========================================================
+   MEAL COUNT
+   ========================================================= */
 
 .meal-count {
+
     position: absolute;
 
     right: 4px;
+
     bottom: 20px;
+
     z-index: 5;
 
     display: flex;
+
     align-items: center;
+
     gap: 10px;
 
     padding: 13px 16px;
@@ -621,18 +831,26 @@ img {
     border-radius: 15px;
 
     background: white;
+
     color: var(--ink);
 
-    box-shadow: 0 16px 35px rgba(0,0,0,.14);
+    box-shadow:
+        0 16px 35px rgba(0,0,0,.14);
 }
 
+
 .meal-count strong {
+
     font-size: 24px;
+
     line-height: 1;
 }
 
+
 .meal-count span {
+
     font-size: 9px;
+
     line-height: 1.25;
 
     color: var(--muted);
@@ -644,28 +862,41 @@ img {
    ========================================================= */
 
 .section-heading {
+
     display: flex;
+
     align-items: flex-end;
+
     justify-content: space-between;
 
     margin-top: 48px;
+
     margin-bottom: 17px;
 }
 
+
 .section-heading h3 {
+
     margin-top: 3px;
 
     font-size: 20px;
+
     letter-spacing: -.6px;
 }
 
+
 .date-label {
+
     font-size: 10px;
+
     color: var(--muted);
 }
 
+
 .section-heading > a {
+
     font-size: 11px;
+
     font-weight: 650;
 
     color: var(--green-2);
@@ -673,10 +904,11 @@ img {
 
 
 /* =========================================================
-   STATS
+   STAT CARDS
    ========================================================= */
 
 .stats-grid {
+
     display: grid;
 
     grid-template-columns:
@@ -685,16 +917,22 @@ img {
     gap: 14px;
 }
 
+
 .stat-card {
+
     min-height: 145px;
 
     display: flex;
+
     align-items: flex-start;
+
     gap: 14px;
 
     padding: 22px;
 
-    border: 1px solid var(--line);
+    border:
+        1px solid var(--line);
+
     border-radius: var(--radius);
 
     background: var(--surface);
@@ -706,17 +944,25 @@ img {
         box-shadow .2s ease;
 }
 
+
 .stat-card:hover {
+
     transform: translateY(-3px);
+
     box-shadow: var(--shadow-hover);
 }
 
+
 .stat-icon {
+
     width: 35px;
+
     height: 35px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     flex: 0 0 auto;
@@ -728,16 +974,23 @@ img {
     color: var(--green);
 
     font-size: 11px;
+
     font-weight: 800;
 }
 
+
 .stat-content {
+
     display: flex;
+
     flex-direction: column;
 }
 
+
 .stat-content small {
+
     font-size: 8px;
+
     font-weight: 750;
 
     letter-spacing: 1.2px;
@@ -745,23 +998,31 @@ img {
     color: var(--muted);
 }
 
+
 .stat-content strong {
+
     margin-top: 7px;
 
     font-size: 29px;
+
     line-height: 1;
 
     letter-spacing: -1.3px;
 }
 
+
 .stat-content strong sup {
+
     margin-left: 2px;
 
     font-size: 12px;
+
     font-weight: 600;
 }
 
+
 .stat-content span {
+
     margin-top: 7px;
 
     font-size: 9px;
@@ -775,9 +1036,12 @@ img {
    ========================================================= */
 
 .meal-panel {
+
     overflow: hidden;
 
-    border: 1px solid var(--line);
+    border:
+        1px solid var(--line);
+
     border-radius: var(--radius);
 
     background: white;
@@ -785,12 +1049,16 @@ img {
     box-shadow: var(--shadow);
 }
 
+
 .meal-table {
+
     width: 100%;
 }
 
+
 .table-header,
 .meal-row {
+
     display: grid;
 
     grid-template-columns:
@@ -799,16 +1067,20 @@ img {
     align-items: center;
 }
 
+
 .table-header {
+
     min-height: 43px;
 
     padding: 0 25px;
 
-    border-bottom: 1px solid var(--line);
+    border-bottom:
+        1px solid var(--line);
 
     background: #fafbf9;
 
     font-size: 8px;
+
     font-weight: 750;
 
     letter-spacing: 1.1px;
@@ -816,25 +1088,34 @@ img {
     color: var(--muted);
 }
 
+
 .meal-row {
+
     min-height: 66px;
 
     padding: 0 25px;
 
-    border-bottom: 1px solid #eef0ec;
+    border-bottom:
+        1px solid #eef0ec;
 
     font-size: 11px;
 }
 
+
 .meal-row:last-child {
+
     border-bottom: 0;
 }
 
+
 .meal-row:hover {
+
     background: #fafcf9;
 }
 
+
 .meal-pill {
+
     display: inline-block;
 
     padding: 5px 9px;
@@ -846,38 +1127,53 @@ img {
     color: var(--green);
 
     font-size: 8px;
+
     font-weight: 700;
 }
 
+
 .food-name {
+
     font-weight: 650;
 }
 
+
 .servings {
+
     color: var(--muted);
 }
 
+
 .energy {
+
     font-weight: 650;
 }
 
 
-/* EMPTY */
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
 
 .empty-state {
+
     padding: 65px 20px;
 
     text-align: center;
 }
 
+
 .empty-icon {
+
     width: 45px;
+
     height: 45px;
 
     margin: 0 auto 13px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     border-radius: 14px;
@@ -889,11 +1185,15 @@ img {
     font-size: 20px;
 }
 
+
 .empty-state h4 {
+
     font-size: 16px;
 }
 
+
 .empty-state p {
+
     margin: 5px auto 18px;
 
     max-width: 340px;
@@ -909,8 +1209,11 @@ img {
    ========================================================= */
 
 .btn {
+
     display: inline-flex;
+
     align-items: center;
+
     justify-content: center;
 
     min-height: 40px;
@@ -920,6 +1223,7 @@ img {
     border-radius: 10px;
 
     font-size: 11px;
+
     font-weight: 700;
 
     border: 0;
@@ -932,30 +1236,45 @@ img {
         background .2s ease;
 }
 
+
 .btn:hover {
+
     transform: translateY(-2px);
 }
 
+
 .btn.primary {
+
     background: var(--green);
+
     color: white;
 
-    box-shadow: 0 8px 18px rgba(24,63,43,.15);
+    box-shadow:
+        0 8px 18px rgba(24,63,43,.15);
 }
 
+
 .btn.primary:hover {
+
     background: var(--green-2);
 }
 
+
 .btn.white {
+
     background: white;
+
     color: var(--green);
 
-    box-shadow: 0 8px 20px rgba(0,0,0,.1);
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.1);
 }
 
+
 .btn.large {
+
     min-height: 46px;
+
     padding: 0 20px;
 }
 
@@ -965,6 +1284,7 @@ img {
    ========================================================= */
 
 .tool-grid {
+
     display: grid;
 
     grid-template-columns:
@@ -973,18 +1293,24 @@ img {
     gap: 15px;
 }
 
+
 .tool-card {
+
     min-height: 215px;
 
     display: flex;
+
     flex-direction: column;
 
     padding: 25px;
 
     position: relative;
+
     overflow: hidden;
 
-    border: 1px solid var(--line);
+    border:
+        1px solid var(--line);
+
     border-radius: var(--radius);
 
     background: white;
@@ -996,23 +1322,35 @@ img {
         box-shadow .2s ease;
 }
 
+
 .tool-card:hover {
+
     transform: translateY(-4px);
+
     box-shadow: var(--shadow-hover);
 }
 
+
 .tool-top {
+
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 }
 
+
 .tool-icon {
+
     width: 37px;
+
     height: 37px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     border-radius: 11px;
@@ -1024,33 +1362,45 @@ img {
     font-size: 16px;
 }
 
+
 .tool-top > span {
+
     font-size: 8px;
+
     font-weight: 750;
+
     letter-spacing: 1px;
 
     color: var(--light-muted);
 }
 
+
 .tool-card h4 {
+
     margin-top: 24px;
 
     font-size: 18px;
+
     letter-spacing: -.5px;
 }
 
+
 .tool-card p {
+
     margin-top: 7px;
 
     max-width: 330px;
 
     font-size: 10px;
+
     line-height: 1.7;
 
     color: var(--muted);
 }
 
+
 .tool-card strong {
+
     margin-top: auto;
 
     font-size: 10px;
@@ -1064,14 +1414,19 @@ img {
    ========================================================= */
 
 .bottom-cta {
+
     min-height: 185px;
 
     margin-top: 48px;
+
     padding: 32px 38px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
+
     gap: 30px;
 
     border-radius: var(--radius-lg);
@@ -1081,18 +1436,25 @@ img {
     color: white;
 }
 
+
 .bottom-cta .eyebrow {
+
     color: rgba(255,255,255,.43);
 }
 
+
 .bottom-cta h3 {
+
     margin-top: 5px;
 
     font-size: 28px;
+
     letter-spacing: -1px;
 }
 
+
 .bottom-cta p {
+
     margin-top: 5px;
 
     font-size: 11px;
@@ -1105,8 +1467,8 @@ img {
    DISCLAIMER
    ========================================================= */
 
-.disclaimer,
-.note {
+.disclaimer {
+
     margin-top: 24px;
 
     text-align: center;
@@ -1122,12 +1484,18 @@ img {
    ========================================================= */
 
 .alerts {
-    width: min(1240px, calc(100% - 92px));
+
+    width: min(
+        1240px,
+        calc(100% - 92px)
+    );
 
     margin: 20px auto 0;
 }
 
+
 .alert {
+
     padding: 11px 15px;
 
     border-radius: 10px;
@@ -1135,39 +1503,53 @@ img {
     font-size: 11px;
 
     background: white;
-    border: 1px solid var(--line);
+
+    border:
+        1px solid var(--line);
 }
 
 
 /* =========================================================
-   RESPONSIVE — TABLET
+   TABLET
    ========================================================= */
 
 @media (max-width: 1050px) {
 
     .sidebar {
+
         width: 215px;
     }
 
+
     .main-area {
+
         width: calc(100% - 215px);
+
         margin-left: 215px;
     }
 
+
     .content {
+
         width: calc(100% - 48px);
     }
 
+
     .dashboard-hero {
+
         padding: 38px;
     }
 
+
     .stats-grid {
+
         grid-template-columns:
             repeat(2, 1fr);
     }
 
+
     .tool-grid {
+
         grid-template-columns:
             1fr;
     }
@@ -1176,17 +1558,21 @@ img {
 
 
 /* =========================================================
-   RESPONSIVE — MOBILE
+   MOBILE
    ========================================================= */
 
 @media (max-width: 760px) {
 
     .app-shell {
+
         display: block;
     }
 
+
     .sidebar {
+
         width: 100%;
+
         min-height: auto;
 
         position: relative;
@@ -1194,26 +1580,35 @@ img {
         padding: 15px 16px;
     }
 
+
     .brand {
+
         padding: 0;
     }
 
+
     .nav-label,
     .sidebar-bottom {
+
         display: none;
     }
 
+
     .main-nav {
+
         margin-top: 15px;
 
         display: grid;
+
         grid-template-columns:
             repeat(4, 1fr);
 
         gap: 5px;
     }
 
+
     .main-nav a {
+
         min-height: 40px;
 
         justify-content: center;
@@ -1227,36 +1622,51 @@ img {
         font-size: 7px;
     }
 
+
     .nav-icon {
+
         font-size: 14px;
     }
 
+
     .main-area {
+
         width: 100%;
+
         margin-left: 0;
     }
 
+
     .topbar {
+
         height: 70px;
 
         padding: 0 18px;
     }
 
+
     .page-heading h1 {
+
         font-size: 18px;
     }
 
+
     .status {
+
         display: none;
     }
 
+
     .content {
+
         width: calc(100% - 30px);
 
         padding-top: 25px;
     }
 
+
     .dashboard-hero {
+
         min-height: auto;
 
         grid-template-columns: 1fr;
@@ -1264,41 +1674,58 @@ img {
         padding: 34px 25px;
     }
 
+
     .hero-copy h2 {
+
         font-size: 38px;
     }
 
+
     .hero-copy p {
+
         font-size: 12px;
     }
 
+
     .hero-actions {
+
         align-items: flex-start;
+
         flex-direction: column;
 
         gap: 13px;
     }
 
+
     .hero-visual {
+
         min-height: 300px;
     }
 
+
     .nutrition-card {
+
         width: min(270px, 85%);
     }
 
+
     .meal-count {
+
         right: 0;
     }
 
+
     .stats-grid {
+
         grid-template-columns:
             1fr 1fr;
 
         gap: 10px;
     }
 
+
     .stat-card {
+
         min-height: 125px;
 
         padding: 16px;
@@ -1306,20 +1733,29 @@ img {
         gap: 9px;
     }
 
+
     .stat-icon {
+
         width: 29px;
+
         height: 29px;
     }
 
+
     .stat-content strong {
+
         font-size: 23px;
     }
 
+
     .table-header {
+
         display: none;
     }
 
+
     .meal-row {
+
         grid-template-columns:
             1fr 1.5fr;
 
@@ -1328,17 +1764,24 @@ img {
         padding: 15px 18px;
     }
 
+
     .meal-row > div:nth-child(3),
     .meal-row > div:nth-child(4) {
+
         font-size: 9px;
     }
 
+
     .tool-grid {
+
         grid-template-columns: 1fr;
     }
 
+
     .bottom-cta {
+
         align-items: flex-start;
+
         flex-direction: column;
 
         padding: 28px;
@@ -1348,30 +1791,40 @@ img {
 
 
 /* =========================================================
-   VERY SMALL PHONES
+   SMALL PHONES
    ========================================================= */
 
 @media (max-width: 430px) {
 
     .brand-text {
+
         display: none;
     }
 
+
     .main-nav {
+
         grid-template-columns:
             repeat(4, 1fr);
     }
 
+
     .hero-copy h2 {
+
         font-size: 33px;
     }
 
+
     .stats-grid {
+
         grid-template-columns: 1fr;
     }
 
+
     .section-heading {
+
         align-items: flex-start;
+
         flex-direction: column;
 
         gap: 5px;
