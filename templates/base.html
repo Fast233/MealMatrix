@@ -13,29 +13,25 @@
 
 <body>
 
-<div class="app-shell">
+<div class="shell">
 
     <!-- SIDEBAR -->
-    <aside class="sidebar">
+
+    <aside>
 
         <div class="brand">
 
-            <div class="brand-mark">M</div>
+            <b>M</b>
 
-            <div class="brand-text">
+            <div>
                 <strong>MealMatrix</strong>
-                <span>PERSONAL NUTRITION</span>
+                <small>PERSONAL NUTRITION</small>
             </div>
 
         </div>
 
 
-        <div class="nav-label">
-            MENU
-        </div>
-
-
-        <nav class="main-nav">
+        <nav>
 
             {% for route, label, icon in [
                 ('home', 'Dashboard', '⌂'),
@@ -49,18 +45,11 @@
             ] %}
 
             <a
-                href="{{ url_for(route) }}"
                 class="{% if request.endpoint == route %}active{% endif %}"
+                href="{{ url_for(route) }}"
             >
-
-                <span class="nav-icon">
-                    {{ icon }}
-                </span>
-
-                <span>
-                    {{ label }}
-                </span>
-
+                <i>{{ icon }}</i>
+                {{ label }}
             </a>
 
             {% endfor %}
@@ -68,21 +57,12 @@
         </nav>
 
 
-        <div class="sidebar-bottom">
+        <div class="side-bottom">
 
-            <div class="connection">
-
-                <span class="connection-dot"></span>
-
-                <span>
-                    CSV database connected
-                </span>
-
-            </div>
+            <span>● CSV database connected</span>
 
             <small>
-                Python + Flask<br>
-                web application
+                Python + Flask web application
             </small>
 
         </div>
@@ -90,33 +70,32 @@
     </aside>
 
 
-    <!-- MAIN CONTENT -->
-    <main class="main-area">
+    <!-- MAIN -->
 
-        <header class="topbar">
+    <main>
 
-            <div class="page-heading">
+        <header>
+
+            <div>
+
+                <span class="mobile-brand">
+                    MealMatrix
+                </span>
 
                 <h1>
                     {{ page }}
                 </h1>
 
-                {% if current_date is defined %}
                 <p>
-                    {{ current_date }}
+                    {{ current_date if current_date is defined else '' }}
                 </p>
-                {% endif %}
 
             </div>
 
 
-            <div class="status">
-
-                <span></span>
-
-                Application running
-
-            </div>
+            <span class="online">
+                ● Application running
+            </span>
 
         </header>
 
@@ -127,17 +106,17 @@
 
             {% if messages %}
 
-            <div class="alerts">
+                <div class="alerts">
 
-                {% for category, msg in messages %}
+                    {% for category, msg in messages %}
 
-                <div class="alert {{ category }}">
-                    {{ msg }}
+                        <div class="alert {{ category }}">
+                            {{ msg }}
+                        </div>
+
+                    {% endfor %}
+
                 </div>
-
-                {% endfor %}
-
-            </div>
 
             {% endif %}
 
@@ -149,6 +128,7 @@
         <section class="content">
 
             {% block content %}
+
             {% endblock %}
 
         </section>
@@ -158,4 +138,5 @@
 </div>
 
 </body>
+
 </html>
