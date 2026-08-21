@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,34 +19,47 @@
     <aside class="sidebar">
 
         <div class="brand">
+
             <div class="brand-mark">M</div>
 
             <div class="brand-text">
                 <strong>MealMatrix</strong>
                 <span>PERSONAL NUTRITION</span>
             </div>
+
         </div>
 
-        <div class="nav-label">MENU</div>
+
+        <div class="nav-label">
+            MENU
+        </div>
+
 
         <nav class="main-nav">
 
-            {% for route,label,icon in [
-                ('home','Dashboard','⌂'),
-                ('add_meal','Add Meal','＋'),
-                ('meals','Search Meals','⌕'),
-                ('foods','Food Database','◉'),
-                ('goal','Calorie Goal','◎'),
-                ('report','Weekly Report','▥'),
-                ('suggestions','AI Coach','✦'),
-                ('habits','Food Habits','◷')
+            {% for route, label, icon in [
+                ('home', 'Dashboard', '⌂'),
+                ('add_meal', 'Add Meal', '＋'),
+                ('meals', 'Search Meals', '⌕'),
+                ('foods', 'Food Database', '◉'),
+                ('goal', 'Calorie Goal', '◎'),
+                ('report', 'Weekly Report', '▥'),
+                ('suggestions', 'AI Coach', '✦'),
+                ('habits', 'Food Habits', '◷')
             ] %}
 
-            <a class="{% if request.endpoint == route %}active{% endif %}"
-               href="{{ url_for(route) }}">
+            <a
+                href="{{ url_for(route) }}"
+                class="{% if request.endpoint == route %}active{% endif %}"
+            >
 
-                <span class="nav-icon">{{ icon }}</span>
-                <span>{{ label }}</span>
+                <span class="nav-icon">
+                    {{ icon }}
+                </span>
+
+                <span>
+                    {{ label }}
+                </span>
 
             </a>
 
@@ -53,11 +67,17 @@
 
         </nav>
 
+
         <div class="sidebar-bottom">
 
             <div class="connection">
+
                 <span class="connection-dot"></span>
-                <span>CSV database connected</span>
+
+                <span>
+                    CSV database connected
+                </span>
+
             </div>
 
             <small>
@@ -70,56 +90,66 @@
     </aside>
 
 
-    <!-- MAIN -->
+    <!-- MAIN CONTENT -->
     <main class="main-area">
 
         <header class="topbar">
 
-            <div class="mobile-brand">
-                <span class="brand-mark">M</span>
-                <strong>MealMatrix</strong>
-            </div>
-
             <div class="page-heading">
-                <h1>{{ page }}</h1>
+
+                <h1>
+                    {{ page }}
+                </h1>
 
                 {% if current_date is defined %}
-                    <p>{{ current_date }}</p>
+                <p>
+                    {{ current_date }}
+                </p>
                 {% endif %}
+
             </div>
 
+
             <div class="status">
+
                 <span></span>
+
                 Application running
+
             </div>
 
         </header>
 
 
+        <!-- FLASH MESSAGES -->
+
         {% with messages = get_flashed_messages(with_categories=true) %}
 
             {% if messages %}
 
-                <div class="alerts">
+            <div class="alerts">
 
-                    {% for category,msg in messages %}
+                {% for category, msg in messages %}
 
-                        <div class="alert {{ category }}">
-                            {{ msg }}
-                        </div>
-
-                    {% endfor %}
-
+                <div class="alert {{ category }}">
+                    {{ msg }}
                 </div>
+
+                {% endfor %}
+
+            </div>
 
             {% endif %}
 
         {% endwith %}
 
 
+        <!-- PAGE CONTENT -->
+
         <section class="content">
 
-            {% block content %}{% endblock %}
+            {% block content %}
+            {% endblock %}
 
         </section>
 
