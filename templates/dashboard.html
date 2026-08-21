@@ -2,33 +2,47 @@
 
 {% block content %}
 
-<!-- HERO -->
+
+<!-- =====================================================
+     HERO
+     ===================================================== -->
 
 <section class="dashboard-hero">
 
     <div class="hero-copy">
 
-        <span class="eyebrow">YOUR NUTRITION, SIMPLIFIED</span>
+        <span class="eyebrow">
+            YOUR NUTRITION, SIMPLIFIED
+        </span>
+
 
         <h2>
             Understand your food.<br>
             <span>Build better patterns.</span>
         </h2>
 
+
         <p>
-            MealMatrix helps you track what you eat, understand your
-            nutrition and discover patterns in your everyday meals.
+            MealMatrix helps you track what you eat,
+            understand your nutrition and discover
+            patterns in your everyday meals.
         </p>
+
 
         <div class="hero-actions">
 
-            <a class="btn primary large"
-               href="{{ url_for('add_meal') }}">
+            <a
+                class="btn primary large"
+                href="{{ url_for('add_meal') }}"
+            >
                 ＋ Log a meal
             </a>
 
-            <a class="hero-link"
-               href="{{ url_for('report') }}">
+
+            <a
+                class="hero-link"
+                href="{{ url_for('report') }}"
+            >
                 View your progress →
             </a>
 
@@ -37,56 +51,102 @@
     </div>
 
 
+    <!-- HERO VISUAL -->
+
     <div class="hero-visual">
 
         <div class="orb orb-one"></div>
+
         <div class="orb orb-two"></div>
+
 
         <div class="nutrition-card">
 
             <div class="nutrition-top">
-                <span>DAILY ACTIVITY</span>
-                <span class="mini-status">LIVE</span>
+
+                <span>
+                    DAILY ACTIVITY
+                </span>
+
+                <span class="mini-status">
+                    LIVE
+                </span>
+
             </div>
 
+
             <div class="nutrition-number">
+
                 {{ totals.calories }}
-                <small>kcal</small>
+
+                <small>
+                    kcal
+                </small>
+
             </div>
+
 
             <div class="nutrition-label">
                 recorded today
             </div>
 
+
             <div class="nutrition-bars">
 
-                <div>
-                    <span>Protein</span>
-                    <b>{{ totals.protein }}g</b>
+                <!-- PROTEIN -->
+
+                <div class="nutrition-line">
+
+                    <span>
+                        Protein
+                    </span>
+
+                    <b>
+                        {{ totals.protein }}g
+                    </b>
+
                 </div>
 
                 <div class="bar">
-                    <i style="width: {{ [totals.protein * 2, 100]|min }}%;"></i>
+                    <i class="protein-bar"></i>
                 </div>
 
 
-                <div>
-                    <span>Carbs</span>
-                    <b>{{ totals.carbs }}g</b>
+                <!-- CARBS -->
+
+                <div class="nutrition-line">
+
+                    <span>
+                        Carbs
+                    </span>
+
+                    <b>
+                        {{ totals.carbs }}g
+                    </b>
+
                 </div>
 
                 <div class="bar">
-                    <i style="width: {{ [totals.carbs, 100]|min }}%;"></i>
+                    <i class="carbs-bar"></i>
                 </div>
 
 
-                <div>
-                    <span>Fat</span>
-                    <b>{{ totals.fat }}g</b>
+                <!-- FAT -->
+
+                <div class="nutrition-line">
+
+                    <span>
+                        Fat
+                    </span>
+
+                    <b>
+                        {{ totals.fat }}g
+                    </b>
+
                 </div>
 
                 <div class="bar">
-                    <i style="width: {{ [totals.fat * 2, 100]|min }}%;"></i>
+                    <i class="fat-bar"></i>
                 </div>
 
             </div>
@@ -94,9 +154,13 @@
         </div>
 
 
+        <!-- MEAL COUNT -->
+
         <div class="meal-count">
 
-            <strong>{{ meals|length }}</strong>
+            <strong>
+                {{ meals|length }}
+            </strong>
 
             <span>
                 meals<br>
@@ -110,69 +174,143 @@
 </section>
 
 
-<!-- SNAPSHOT -->
+
+<!-- =====================================================
+     NUTRITION SNAPSHOT
+     ===================================================== -->
 
 <div class="section-heading">
 
     <div>
-        <span class="eyebrow">TODAY</span>
-        <h3>Nutrition snapshot</h3>
+
+        <span class="eyebrow">
+            TODAY
+        </span>
+
+        <h3>
+            Nutrition snapshot
+        </h3>
+
     </div>
 
-    <span class="date-label">{{ today }}</span>
+
+    <span class="date-label">
+        {{ today }}
+    </span>
 
 </div>
+
 
 
 <div class="stats-grid">
 
-    <div class="stat-card calories">
 
-        <div class="stat-icon">◉</div>
+    <!-- CALORIES -->
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            ◉
+        </div>
 
         <div class="stat-content">
-            <small>CALORIES</small>
-            <strong>{{ totals.calories }}</strong>
-            <span>kcal recorded</span>
+
+            <small>
+                CALORIES
+            </small>
+
+            <strong>
+                {{ totals.calories }}
+            </strong>
+
+            <span>
+                kcal recorded
+            </span>
+
         </div>
 
     </div>
 
 
+
+    <!-- PROTEIN -->
+
     <div class="stat-card">
 
-        <div class="stat-icon">P</div>
+        <div class="stat-icon">
+            P
+        </div>
 
         <div class="stat-content">
-            <small>PROTEIN</small>
-            <strong>{{ totals.protein }}<sup>g</sup></strong>
-            <span>from logged foods</span>
+
+            <small>
+                PROTEIN
+            </small>
+
+            <strong>
+                {{ totals.protein }}<sup>g</sup>
+            </strong>
+
+            <span>
+                from logged foods
+            </span>
+
         </div>
 
     </div>
 
 
+
+    <!-- CARBS -->
+
     <div class="stat-card">
 
-        <div class="stat-icon">C</div>
+        <div class="stat-icon">
+            C
+        </div>
 
         <div class="stat-content">
-            <small>CARBOHYDRATES</small>
-            <strong>{{ totals.carbs }}<sup>g</sup></strong>
-            <span>from logged foods</span>
+
+            <small>
+                CARBOHYDRATES
+            </small>
+
+            <strong>
+                {{ totals.carbs }}<sup>g</sup>
+            </strong>
+
+            <span>
+                from logged foods
+            </span>
+
         </div>
 
     </div>
 
 
+
+    <!-- FAT -->
+
     <div class="stat-card">
 
-        <div class="stat-icon">F</div>
+        <div class="stat-icon">
+            F
+        </div>
 
         <div class="stat-content">
-            <small>FAT</small>
-            <strong>{{ totals.fat }}<sup>g</sup></strong>
-            <span>from logged foods</span>
+
+            <small>
+                FAT
+            </small>
+
+            <strong>
+                {{ totals.fat }}<sup>g</sup>
+            </strong>
+
+            <span>
+                from logged foods
+            </span>
+
         </div>
 
     </div>
@@ -180,14 +318,25 @@
 </div>
 
 
-<!-- MEALS -->
+
+<!-- =====================================================
+     TODAY'S MEALS
+     ===================================================== -->
 
 <div class="section-heading meals-heading">
 
     <div>
-        <span class="eyebrow">YOUR LOG</span>
-        <h3>Today's meals</h3>
+
+        <span class="eyebrow">
+            YOUR LOG
+        </span>
+
+        <h3>
+            Today's meals
+        </h3>
+
     </div>
+
 
     <a href="{{ url_for('meals') }}">
         View history →
@@ -196,103 +345,163 @@
 </div>
 
 
+
 <div class="meal-panel">
 
     {% if meals %}
 
-    <div class="meal-table">
-
-        <div class="table-header">
-            <span>MEAL</span>
-            <span>FOOD</span>
-            <span>SERVINGS</span>
-            <span>ENERGY</span>
-        </div>
+        <div class="meal-table">
 
 
-        {% for m in meals|reverse %}
+            <!-- TABLE HEADER -->
 
-        <div class="meal-row">
+            <div class="table-header">
 
-            <div>
-                <span class="meal-pill">
-                    {{ m.meal_type }}
+                <span>
+                    MEAL
                 </span>
+
+                <span>
+                    FOOD
+                </span>
+
+                <span>
+                    SERVINGS
+                </span>
+
+                <span>
+                    ENERGY
+                </span>
+
             </div>
 
-            <div class="food-name">
-                {{ m.food_item }}
+
+            <!-- MEALS -->
+
+            {% for m in meals|reverse %}
+
+            <div class="meal-row">
+
+                <div>
+
+                    <span class="meal-pill">
+                        {{ m.meal_type }}
+                    </span>
+
+                </div>
+
+
+                <div class="food-name">
+                    {{ m.food_item }}
+                </div>
+
+
+                <div class="servings">
+                    {{ m.quantity }}
+                </div>
+
+
+                <div class="energy">
+                    {{ m.calories }} kcal
+                </div>
+
             </div>
 
-            <div class="servings">
-                {{ m.quantity }}
-            </div>
-
-            <div class="energy">
-                {{ m.calories }} kcal
-            </div>
+            {% endfor %}
 
         </div>
 
-        {% endfor %}
-
-    </div>
 
     {% else %}
 
-    <div class="empty-state">
 
-        <div class="empty-icon">＋</div>
+        <!-- EMPTY STATE -->
 
-        <h4>No meals recorded yet</h4>
+        <div class="empty-state">
 
-        <p>
-            Start your nutrition journey by logging your first meal.
-        </p>
+            <div class="empty-icon">
+                ＋
+            </div>
 
-        <a class="btn primary"
-           href="{{ url_for('add_meal') }}">
-            Add your first meal
-        </a>
+            <h4>
+                No meals recorded yet
+            </h4>
 
-    </div>
+            <p>
+                Start your nutrition journey by logging
+                your first meal.
+            </p>
+
+            <a
+                class="btn primary"
+                href="{{ url_for('add_meal') }}"
+            >
+                Add your first meal
+            </a>
+
+        </div>
 
     {% endif %}
 
 </div>
 
 
-<!-- TOOLS -->
+
+<!-- =====================================================
+     PERSONAL TOOLS
+     ===================================================== -->
 
 <div class="section-heading">
 
     <div>
-        <span class="eyebrow">EXPLORE</span>
-        <h3>Personal tools</h3>
+
+        <span class="eyebrow">
+            EXPLORE
+        </span>
+
+        <h3>
+            Personal tools
+        </h3>
+
     </div>
 
 </div>
 
 
+
 <div class="tool-grid">
 
-    <a class="tool-card ai"
-       href="{{ url_for('suggestions') }}">
+
+    <!-- AI COACH -->
+
+    <a
+        class="tool-card"
+        href="{{ url_for('suggestions') }}"
+    >
 
         <div class="tool-top">
 
-            <div class="tool-icon">✦</div>
+            <div class="tool-icon">
+                ✦
+            </div>
 
-            <span>SMART</span>
+            <span>
+                SMART
+            </span>
 
         </div>
 
-        <h4>AI Coach</h4>
+
+        <h4>
+            AI Coach
+        </h4>
+
 
         <p>
-            Discover patterns in your meals and get suggestions
-            based on the foods you actually record.
+            Discover patterns in your meals and get
+            suggestions based on the foods you actually record.
         </p>
+
 
         <strong>
             Explore AI Coach →
@@ -301,23 +510,37 @@
     </a>
 
 
-    <a class="tool-card report"
-       href="{{ url_for('report') }}">
+
+    <!-- WEEKLY REPORT -->
+
+    <a
+        class="tool-card"
+        href="{{ url_for('report') }}"
+    >
 
         <div class="tool-top">
 
-            <div class="tool-icon">▥</div>
+            <div class="tool-icon">
+                ▥
+            </div>
 
-            <span>INSIGHTS</span>
+            <span>
+                INSIGHTS
+            </span>
 
         </div>
 
-        <h4>Weekly Report</h4>
+
+        <h4>
+            Weekly Report
+        </h4>
+
 
         <p>
-            See how your logged nutrition changes across
-            your recent dates.
+            See how your logged nutrition changes
+            across your recent dates.
         </p>
+
 
         <strong>
             View report →
@@ -326,23 +549,37 @@
     </a>
 
 
-    <a class="tool-card habits"
-       href="{{ url_for('habits') }}">
+
+    <!-- FOOD HABITS -->
+
+    <a
+        class="tool-card"
+        href="{{ url_for('habits') }}"
+    >
 
         <div class="tool-top">
 
-            <div class="tool-icon">◷</div>
+            <div class="tool-icon">
+                ◷
+            </div>
 
-            <span>PATTERNS</span>
+            <span>
+                PATTERNS
+            </span>
 
         </div>
 
-        <h4>Food Habits</h4>
+
+        <h4>
+            Food Habits
+        </h4>
+
 
         <p>
-            Understand the foods and meal patterns that
-            appear most often in your log.
+            Understand the foods and meal patterns
+            that appear most often in your log.
         </p>
+
 
         <strong>
             Explore habits →
@@ -353,36 +590,53 @@
 </div>
 
 
-<!-- QUICK CTA -->
+
+<!-- =====================================================
+     BOTTOM CTA
+     ===================================================== -->
 
 <section class="bottom-cta">
 
     <div>
 
-        <span class="eyebrow">KEEP BUILDING</span>
+        <span class="eyebrow">
+            KEEP BUILDING
+        </span>
+
 
         <h3>
             One meal at a time.
         </h3>
 
+
         <p>
-            The more you record, the more useful your nutrition
-            insights become.
+            The more you record, the more useful
+            your nutrition insights become.
         </p>
 
     </div>
 
-    <a class="btn white"
-       href="{{ url_for('add_meal') }}">
+
+    <a
+        class="btn white"
+        href="{{ url_for('add_meal') }}"
+    >
         ＋ Log another meal
     </a>
 
 </section>
 
 
+
+<!-- DISCLAIMER -->
+
 <p class="disclaimer">
-    Nutrition values are estimates from the supplied food database.
-    MealMatrix is an educational tracking tool, not medical advice.
+
+    Nutrition values are estimates from the supplied
+    food database. MealMatrix is an educational tracking
+    tool, not medical advice.
+
 </p>
+
 
 {% endblock %}
