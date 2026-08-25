@@ -1,1 +1,15 @@
-{% extends 'base.html' %}{% block content %}<div class="form-card"><span>GOAL SETTING</span><h2>Calorie goal</h2><p class="muted">The original project stores a weekly goal and converts it into a daily target.</p><form method="post"><label>Weekly calorie goal<input name="weekly_goal" type="number" min="0" step="1"></label><button class="btn primary">Save goal</button></form>{% if target %}<div class="goal-result">Current daily target: <b>{{ '%.1f'|format(target) }} kcal</b></div>{% endif %}</div>{% endblock %}
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-header"><div><span class="eyebrow">GOAL SETTING</span><h1>Calorie goal</h1><p>Set the weekly calorie target you want MealMatrix to track.</p></div></div>
+<div class="goal-layout">
+  <section class="form-card">
+    <span class="card-label">YOUR TARGET</span><h2 style="margin-top:6px;font-size:22px">Set a weekly goal</h2>
+    <p style="margin-top:7px;color:var(--mm-muted);font-size:12px">Your weekly goal is divided by seven to display a daily tracking target. This is a tracking tool, not medical advice.</p>
+    <form method="POST" action="{{ url_for('goal') }}" style="margin-top:24px">
+      <div class="form-group"><label for="weekly_goal">Weekly calorie goal</label><input id="weekly_goal" name="weekly_goal" type="number" min="0" step="1" placeholder="e.g. 14000" required></div>
+      <button class="btn primary" type="submit">Save goal →</button>
+    </form>
+  </section>
+  <aside class="goal-hero"><span class="card-label" style="color:#a9c1b0">CURRENT DAILY TARGET</span>{% if target %}<strong>{{ '%.0f'|format(target) }}</strong><span style="color:#a9c1b0;font-size:12px">kcal per day</span>{% else %}<strong>—</strong><span style="color:#a9c1b0;font-size:12px">No target set yet</span>{% endif %}</aside>
+</div>
+{% endblock %}
