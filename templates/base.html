@@ -1,38 +1,20 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>MealMatrix — {{ page }}</title>
-
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='overrides.css') }}">
 </head>
-
 <body>
-
 <div class="shell">
-
-    <!-- SIDEBAR -->
-
     <aside>
-
         <div class="brand">
-
             <b>M</b>
-
-            <div>
-                <strong>MealMatrix</strong>
-                <small>PERSONAL NUTRITION</small>
-            </div>
-
+            <div><strong>MealMatrix</strong><small>PERSONAL NUTRITION</small></div>
         </div>
-
-
         <nav>
-
             {% for route, label, icon in [
                 ('home', 'Dashboard', '⌂'),
                 ('add_meal', 'Add Meal', '＋'),
@@ -41,102 +23,41 @@
                 ('goal', 'Calorie Goal', '◎'),
                 ('report', 'Weekly Report', '▥'),
                 ('suggestions', 'AI Coach', '✦'),
-                ('habits', 'Food Habits', '◷')
+                ('habits', 'Food Habits', '◷'),
+                ('profile', 'Profile', '○')
             ] %}
-
-            <a
-                class="{% if request.endpoint == route %}active{% endif %}"
-                href="{{ url_for(route) }}"
-            >
-                <i>{{ icon }}</i>
-                {{ label }}
-            </a>
-
+            <a class="{% if request.endpoint == route %}active{% endif %}" href="{{ url_for(route) }}"><i>{{ icon }}</i>{{ label }}</a>
             {% endfor %}
-
         </nav>
-
-
         <div class="side-bottom">
-
             <span>● CSV database connected</span>
-
-            <small>
-                Python + Flask web application
-            </small>
-
+            <small>Python + Flask web application</small>
+            <a href="{{ url_for('logout') }}" style="display:block;margin-top:12px;color:#d7aaa5;font-weight:650;">Sign out</a>
         </div>
-
     </aside>
-
-
-    <!-- MAIN -->
-
     <main>
-
-        <header>
-
-            <div>
-
-                <span class="mobile-brand">
-                    MealMatrix
-                </span>
-
-                <h1>
-                    {{ page }}
-                </h1>
-
-                <p>
-                    {{ current_date if current_date is defined else '' }}
-                </p>
-
+        <div class="mobile-app-header">
+            <span class="mobile-brand">MealMatrix</span>
+            <button class="btn secondary" type="button" onclick="document.getElementById('mobileMenu').hidden=!document.getElementById('mobileMenu').hidden">Menu</button>
+            <div class="mobile-menu" id="mobileMenu" hidden>
+                {% for route, label in [('home','Dashboard'),('add_meal','Add Meal'),('meals','Search Meals'),('foods','Food Database'),('goal','Calorie Goal'),('report','Weekly Report'),('suggestions','AI Coach'),('habits','Food Habits'),('profile','Profile'),('logout','Sign out')] %}
+                <a href="{{ url_for(route) }}">{{ label }}</a>
+                {% endfor %}
             </div>
-
-
-            <span class="online">
-                ● Application running
-            </span>
-
+        </div>
+        <header>
+            <div>
+                <span class="mobile-brand">MealMatrix</span>
+                <h1>{{ page }}</h1>
+                <p>{{ current_date if current_date is defined else '' }}</p>
+            </div>
+            <span class="online">● Application running</span>
         </header>
-
-
-        <!-- FLASH MESSAGES -->
-
         {% with messages = get_flashed_messages(with_categories=true) %}
-
-            {% if messages %}
-
-                <div class="alerts">
-
-                    {% for category, msg in messages %}
-
-                        <div class="alert {{ category }}">
-                            {{ msg }}
-                        </div>
-
-                    {% endfor %}
-
-                </div>
-
-            {% endif %}
-
+            {% if messages %}<div class="alerts">{% for category, msg in messages %}<div class="alert {{ category }}">{{ msg }}</div>{% endfor %}</div>{% endif %}
         {% endwith %}
-
-
-        <!-- PAGE CONTENT -->
-
-        <section class="content">
-
-            {% block content %}
-
-            {% endblock %}
-
-        </section>
-
+        <section class="content">{% block content %}{% endblock %}</section>
     </main>
-
 </div>
-
 </body>
-
 </html>
