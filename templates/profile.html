@@ -2,368 +2,574 @@
 
 {% block content %}
 
-<div class="hero compact">
+<div class="profile-page">
 
-    <div>
-        <span>MY PROFILE</span>
 
-        <h2>Your MealMatrix profile.</h2>
+    <!-- =====================================================
+         PROFILE HEADER
+    ====================================================== -->
 
-        <p>
-            Update your information and preferences to keep
-            your nutrition tracking personalised.
-        </p>
-    </div>
-
-</div>
-
-
-<div class="form-card">
-
-    <div class="section-heading">
-
-        <h3>Personal Information</h3>
-
-        <p>
-            Keep your basic information up to date.
-        </p>
-
-    </div>
-
-
-    <form method="POST">
-
-        <!-- AGE -->
-
-        <label for="age">
-            Age
-        </label>
-
-        <input
-            type="number"
-            id="age"
-            name="age"
-            min="1"
-            value="{{ profile['age'] if profile and profile['age'] else '' }}"
-            placeholder="Enter your age"
-            required
-        >
-
-
-        <!-- HEIGHT -->
-
-        <label for="height">
-            Height (cm)
-        </label>
-
-        <input
-            type="number"
-            id="height"
-            name="height"
-            min="1"
-            step="0.1"
-            value="{{ profile['height'] if profile and profile['height'] else '' }}"
-            placeholder="Enter your height"
-            required
-        >
-
-
-        <!-- WEIGHT -->
-
-        <label for="weight">
-            Weight (kg)
-        </label>
-
-        <input
-            type="number"
-            id="weight"
-            name="weight"
-            min="1"
-            step="0.1"
-            value="{{ profile['weight'] if profile and profile['weight'] else '' }}"
-            placeholder="Enter your weight"
-            required
-        >
-
-
-        <!-- GOAL -->
-
-        <label for="goal">
-            Main Goal
-        </label>
-
-        <select
-            id="goal"
-            name="goal"
-            required
-        >
-
-            <option value="">
-                Select your goal
-            </option>
-
-            <option
-                value="Maintain weight"
-                {% if profile and profile['goal'] == 'Maintain weight' %}selected{% endif %}
-            >
-                Maintain weight
-            </option>
-
-            <option
-                value="Lose weight"
-                {% if profile and profile['goal'] == 'Lose weight' %}selected{% endif %}
-            >
-                Lose weight
-            </option>
-
-            <option
-                value="Gain weight"
-                {% if profile and profile['goal'] == 'Gain weight' %}selected{% endif %}
-            >
-                Gain weight
-            </option>
-
-            <option
-                value="Build muscle"
-                {% if profile and profile['goal'] == 'Build muscle' %}selected{% endif %}
-            >
-                Build muscle
-            </option>
-
-            <option
-                value="Improve nutrition"
-                {% if profile and profile['goal'] == 'Improve nutrition' %}selected{% endif %}
-            >
-                Improve nutrition
-            </option>
-
-        </select>
-
-
-        <!-- ACTIVITY LEVEL -->
-
-        <label for="activity_level">
-            Activity Level
-        </label>
-
-        <select
-            id="activity_level"
-            name="activity_level"
-            required
-        >
-
-            <option value="">
-                Select activity level
-            </option>
-
-            <option
-                value="Low"
-                {% if profile and profile['activity_level'] == 'Low' %}selected{% endif %}
-            >
-                Low
-            </option>
-
-            <option
-                value="Moderate"
-                {% if profile and profile['activity_level'] == 'Moderate' %}selected{% endif %}
-            >
-                Moderate
-            </option>
-
-            <option
-                value="High"
-                {% if profile and profile['activity_level'] == 'High' %}selected{% endif %}
-            >
-                High
-            </option>
-
-            <option
-                value="Very High"
-                {% if profile and profile['activity_level'] == 'Very High' %}selected{% endif %}
-            >
-                Very High
-            </option>
-
-        </select>
-
-
-        <!-- FOOD PREFERENCE -->
-
-        <label for="food_preference">
-            Food Preference
-        </label>
-
-        <select
-            id="food_preference"
-            name="food_preference"
-            required
-        >
-
-            <option value="">
-                Select preference
-            </option>
-
-            <option
-                value="No preference"
-                {% if profile and profile['food_preference'] == 'No preference' %}selected{% endif %}
-            >
-                No preference
-            </option>
-
-            <option
-                value="Vegetarian"
-                {% if profile and profile['food_preference'] == 'Vegetarian' %}selected{% endif %}
-            >
-                Vegetarian
-            </option>
-
-            <option
-                value="Non-vegetarian"
-                {% if profile and profile['food_preference'] == 'Non-vegetarian' %}selected{% endif %}
-            >
-                Non-vegetarian
-            </option>
-
-            <option
-                value="Vegan"
-                {% if profile and profile['food_preference'] == 'Vegan' %}selected{% endif %}
-            >
-                Vegan
-            </option>
-
-        </select>
-
-
-        <!-- MEALS PER DAY -->
-
-        <label for="meals_per_day">
-            Meals Per Day
-        </label>
-
-        <input
-            type="number"
-            id="meals_per_day"
-            name="meals_per_day"
-            min="1"
-            max="10"
-            value="{{ profile['meals_per_day'] if profile and profile['meals_per_day'] else 3 }}"
-            required
-        >
-
-
-        <!-- MEAL TIMES -->
-
-        <label for="meal_times">
-            Usual Meal Times
-        </label>
-
-        <input
-            type="text"
-            id="meal_times"
-            name="meal_times"
-            value="{{ profile['meal_times'] if profile and profile['meal_times'] else '' }}"
-            placeholder="e.g. 8 AM, 1 PM, 8 PM"
-        >
-
-
-        <!-- ACTIVITY FREQUENCY -->
-
-        <label for="activity_frequency">
-            Activity Frequency
-        </label>
-
-        <select
-            id="activity_frequency"
-            name="activity_frequency"
-            required
-        >
-
-            <option value="">
-                Select frequency
-            </option>
-
-            <option
-                value="Rarely"
-                {% if profile and profile['activity_frequency'] == 'Rarely' %}selected{% endif %}
-            >
-                Rarely
-            </option>
-
-            <option
-                value="1-2 days a week"
-                {% if profile and profile['activity_frequency'] == '1-2 days a week' %}selected{% endif %}
-            >
-                1–2 days a week
-            </option>
-
-            <option
-                value="3-4 days a week"
-                {% if profile and profile['activity_frequency'] == '3-4 days a week' %}selected{% endif %}
-            >
-                3–4 days a week
-            </option>
-
-            <option
-                value="5-6 days a week"
-                {% if profile and profile['activity_frequency'] == '5-6 days a week' %}selected{% endif %}
-            >
-                5–6 days a week
-            </option>
-
-            <option
-                value="Every day"
-                {% if profile and profile['activity_frequency'] == 'Every day' %}selected{% endif %}
-            >
-                Every day
-            </option>
-
-        </select>
-
-
-        <button
-            type="submit"
-            class="btn primary auth-btn"
-        >
-            Save Changes
-        </button>
-
-    </form>
-
-</div>
-
-
-<div class="form-card profile-account-card">
-
-    <div class="section-heading">
-
-        <h3>Account Information</h3>
-
-        <p>
-            Your account details.
-        </p>
-
-    </div>
-
-    <div class="account-info">
+    <div class="profile-header">
 
         <div>
-            <span>Name</span>
-            <strong>{{ user['name'] }}</strong>
+
+            <span class="eyebrow">
+                YOUR MEALMATRIX
+            </span>
+
+            <h1>
+                My Profile
+            </h1>
+
+            <p>
+                Keep your information up to date so MealMatrix
+                can better understand your routine.
+            </p>
+
         </div>
 
-        <div>
-            <span>Email</span>
-            <strong>{{ user['email'] }}</strong>
-        </div>
 
-        <div>
-            <span>Member since</span>
-            <strong>
-                {{ user['created_at'][:10] }}
-            </strong>
+        <div class="profile-avatar">
+
+            {{ user["name"][0]|upper }}
+
         </div>
 
     </div>
+
+
+
+    <!-- =====================================================
+         PROFILE CONTENT
+    ====================================================== -->
+
+    <div class="profile-layout">
+
+
+        <!-- =================================================
+             PERSONAL INFORMATION
+        ================================================== -->
+
+        <div class="profile-card">
+
+            <div class="card-heading">
+
+                <div>
+
+                    <span class="card-label">
+                        PERSONAL INFORMATION
+                    </span>
+
+                    <h2>
+                        About you
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <form method="POST">
+
+
+                <div class="form-grid">
+
+
+                    <!-- NAME -->
+
+                    <div class="form-group full-width">
+
+                        <label>
+                            Name
+                        </label>
+
+                        <input
+                            type="text"
+                            value="{{ user['name'] }}"
+                            disabled
+                        >
+
+                        <small class="form-hint">
+                            Your account name cannot be changed here.
+                        </small>
+
+                    </div>
+
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group full-width">
+
+                        <label>
+                            Email address
+                        </label>
+
+                        <input
+                            type="email"
+                            value="{{ user['email'] }}"
+                            disabled
+                        >
+
+                    </div>
+
+
+
+                    <!-- AGE -->
+
+                    <div class="form-group">
+
+                        <label for="age">
+                            Age
+                        </label>
+
+                        <input
+                            type="number"
+                            id="age"
+                            name="age"
+                            min="1"
+                            value="{{ profile['age'] if profile else '' }}"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- HEIGHT -->
+
+                    <div class="form-group">
+
+                        <label for="height">
+                            Height
+                            <span>(cm)</span>
+                        </label>
+
+                        <input
+                            type="number"
+                            id="height"
+                            name="height"
+                            min="1"
+                            step="0.1"
+                            value="{{ profile['height'] if profile else '' }}"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- WEIGHT -->
+
+                    <div class="form-group">
+
+                        <label for="weight">
+                            Weight
+                            <span>(kg)</span>
+                        </label>
+
+                        <input
+                            type="number"
+                            id="weight"
+                            name="weight"
+                            min="1"
+                            step="0.1"
+                            value="{{ profile['weight'] if profile else '' }}"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- MEALS PER DAY -->
+
+                    <div class="form-group">
+
+                        <label for="meals_per_day">
+                            Meals per day
+                        </label>
+
+                        <input
+                            type="number"
+                            id="meals_per_day"
+                            name="meals_per_day"
+                            min="1"
+                            max="10"
+                            value="{{ profile['meals_per_day'] if profile else 3 }}"
+                            required
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     GOALS & PREFERENCES
+                ================================================== -->
+
+                <div class="profile-divider"></div>
+
+
+                <div class="card-heading">
+
+                    <div>
+
+                        <span class="card-label">
+                            GOALS & PREFERENCES
+                        </span>
+
+                        <h2>
+                            Your routine
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <!-- GOAL -->
+
+                    <div class="form-group">
+
+                        <label for="goal">
+                            Main goal
+                        </label>
+
+                        <select
+                            id="goal"
+                            name="goal"
+                            required
+                        >
+
+                            <option
+                                value="Maintain weight"
+                                {% if profile and profile['goal'] == 'Maintain weight' %}selected{% endif %}
+                            >
+                                Maintain weight
+                            </option>
+
+                            <option
+                                value="Improve nutrition"
+                                {% if profile and profile['goal'] == 'Improve nutrition' %}selected{% endif %}
+                            >
+                                Improve nutrition
+                            </option>
+
+                            <option
+                                value="Build muscle"
+                                {% if profile and profile['goal'] == 'Build muscle' %}selected{% endif %}
+                            >
+                                Build muscle
+                            </option>
+
+                            <option
+                                value="Gain weight"
+                                {% if profile and profile['goal'] == 'Gain weight' %}selected{% endif %}
+                            >
+                                Gain weight
+                            </option>
+
+                            <option
+                                value="Lose weight"
+                                {% if profile and profile['goal'] == 'Lose weight' %}selected{% endif %}
+                            >
+                                Lose weight
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- ACTIVITY LEVEL -->
+
+                    <div class="form-group">
+
+                        <label for="activity_level">
+                            Activity level
+                        </label>
+
+                        <select
+                            id="activity_level"
+                            name="activity_level"
+                            required
+                        >
+
+                            <option value="">
+                                Select activity level
+                            </option>
+
+                            <option
+                                value="Low"
+                                {% if profile and profile['activity_level'] == 'Low' %}selected{% endif %}
+                            >
+                                Low
+                            </option>
+
+                            <option
+                                value="Moderate"
+                                {% if profile and profile['activity_level'] == 'Moderate' %}selected{% endif %}
+                            >
+                                Moderate
+                            </option>
+
+                            <option
+                                value="High"
+                                {% if profile and profile['activity_level'] == 'High' %}selected{% endif %}
+                            >
+                                High
+                            </option>
+
+                            <option
+                                value="Very High"
+                                {% if profile and profile['activity_level'] == 'Very High' %}selected{% endif %}
+                            >
+                                Very High
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- FOOD PREFERENCE -->
+
+                    <div class="form-group">
+
+                        <label for="food_preference">
+                            Food preference
+                        </label>
+
+                        <select
+                            id="food_preference"
+                            name="food_preference"
+                            required
+                        >
+
+                            <option value="">
+                                Select preference
+                            </option>
+
+                            <option
+                                value="No preference"
+                                {% if profile and profile['food_preference'] == 'No preference' %}selected{% endif %}
+                            >
+                                No preference
+                            </option>
+
+                            <option
+                                value="Vegetarian"
+                                {% if profile and profile['food_preference'] == 'Vegetarian' %}selected{% endif %}
+                            >
+                                Vegetarian
+                            </option>
+
+                            <option
+                                value="Non-vegetarian"
+                                {% if profile and profile['food_preference'] == 'Non-vegetarian' %}selected{% endif %}
+                            >
+                                Non-vegetarian
+                            </option>
+
+                            <option
+                                value="Vegan"
+                                {% if profile and profile['food_preference'] == 'Vegan' %}selected{% endif %}
+                            >
+                                Vegan
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- ACTIVITY FREQUENCY -->
+
+                    <div class="form-group">
+
+                        <label for="activity_frequency">
+                            Activity frequency
+                        </label>
+
+                        <select
+                            id="activity_frequency"
+                            name="activity_frequency"
+                            required
+                        >
+
+                            <option value="">
+                                Select frequency
+                            </option>
+
+                            <option
+                                value="Rarely"
+                                {% if profile and profile['activity_frequency'] == 'Rarely' %}selected{% endif %}
+                            >
+                                Rarely
+                            </option>
+
+                            <option
+                                value="1-2 days a week"
+                                {% if profile and profile['activity_frequency'] == '1-2 days a week' %}selected{% endif %}
+                            >
+                                1–2 days a week
+                            </option>
+
+                            <option
+                                value="3-4 days a week"
+                                {% if profile and profile['activity_frequency'] == '3-4 days a week' %}selected{% endif %}
+                            >
+                                3–4 days a week
+                            </option>
+
+                            <option
+                                value="5-6 days a week"
+                                {% if profile and profile['activity_frequency'] == '5-6 days a week' %}selected{% endif %}
+                            >
+                                5–6 days a week
+                            </option>
+
+                            <option
+                                value="Every day"
+                                {% if profile and profile['activity_frequency'] == 'Every day' %}selected{% endif %}
+                            >
+                                Every day
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- MEAL TIMES -->
+
+                    <div class="form-group full-width">
+
+                        <label for="meal_times">
+                            Usual meal times
+                            <span>(optional)</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="meal_times"
+                            name="meal_times"
+                            placeholder="e.g. 8 AM, 1 PM, 8 PM"
+                            value="{{ profile['meal_times'] if profile else '' }}"
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- SAVE -->
+
+                <div class="profile-actions">
+
+                    <button
+                        type="submit"
+                        class="btn primary"
+                    >
+
+                        Save changes
+                        →
+
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+
+
+        <!-- =================================================
+             PROFILE SUMMARY
+        ================================================== -->
+
+        <aside class="profile-side">
+
+
+            <div class="profile-summary-card">
+
+
+                <span class="card-label">
+                    PROFILE STATUS
+                </span>
+
+
+                <div class="profile-status">
+
+                    <span class="status-dot"></span>
+
+                    <strong>
+                        Profile active
+                    </strong>
+
+                </div>
+
+
+                <p>
+                    Your information is being used to
+                    personalise your MealMatrix experience.
+                </p>
+
+
+            </div>
+
+
+
+            <!-- ACCOUNT CARD -->
+
+            <div class="profile-summary-card">
+
+
+                <span class="card-label">
+                    ACCOUNT
+                </span>
+
+
+                <h3>
+                    {{ user["name"] }}
+                </h3>
+
+
+                <p>
+                    {{ user["email"] }}
+                </p>
+
+
+                <a
+                    href="{{ url_for('logout') }}"
+                    class="profile-logout"
+                >
+                    Sign out
+                </a>
+
+
+            </div>
+
+
+        </aside>
+
+
+    </div>
+
 
 </div>
 
