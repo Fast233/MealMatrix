@@ -2,116 +2,409 @@
 
 {% block content %}
 
-<div class="hero compact">
-    <div>
-        <span>QUICK LOG</span>
-        <h2>Record what you ate.</h2>
-        <p>Choose a food and serving size. MealMatrix calculates the nutrition automatically.</p>
+<div class="add-meal-page">
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <div class="page-header">
+
+        <div>
+
+            <span class="eyebrow">
+                QUICK LOG
+            </span>
+
+            <h1>
+                Record what you ate.
+            </h1>
+
+            <p>
+                Choose a food, select the meal type and
+                enter how much you had.
+            </p>
+
+        </div>
+
     </div>
-</div>
 
-<div class="form-card">
-    <form method="post">
 
-        <label>
-            Meal type
-            <select name="meal_type">
-                <option>Breakfast</option>
-                <option>Lunch</option>
-                <option>Dinner</option>
-                <option>Snack</option>
-            </select>
-        </label>
 
-        <label>
-            Food
-            <select name="food">
-                {% for f in foods %}
-                <option value="{{ f.name.lower() }}">
-                    {{ f.name }} — {{ "%.0f"|format(f.calories) }} kcal
-                </option>
-                {% endfor %}
-            </select>
-        </label>
+    <!-- =====================================================
+         MAIN LAYOUT
+    ====================================================== -->
 
-        <label>
-            Quantity
-            <input name="quantity" type="number" min="0.25" step="0.25" value="1">
-        </label>
+    <div class="add-meal-layout">
 
-        <button class="btn primary" type="submit">
-            Add Meal
-        </button>
 
-    </form>
-</div>
+        <!-- =================================================
+             LOG MEAL
+        ================================================== -->
 
-<div class="form-card custom-food-card">
-    <span>CUSTOM FOOD</span>
-    <h2>Food not in the database?</h2>
-    <p>Add it once and it will be available for future meals.</p>
+        <section class="form-card">
 
-    <form method="post" action="{{ url_for('add_food') }}">
 
-        <label>
-            Food name
-            <input
-                name="name"
-                type="text"
-                placeholder="e.g. Homemade Paneer Roll"
-                required
+            <div class="card-heading">
+
+                <div>
+
+                    <span class="card-label">
+                        ADD TO TODAY
+                    </span>
+
+                    <h2>
+                        Log a meal
+                    </h2>
+
+                </div>
+
+                <span class="card-number">
+                    01
+                </span>
+
+            </div>
+
+
+
+            <form method="POST">
+
+
+                <!-- MEAL TYPE -->
+
+                <div class="form-group">
+
+                    <label for="meal_type">
+                        Meal type
+                    </label>
+
+                    <select
+                        id="meal_type"
+                        name="meal_type"
+                        required
+                    >
+
+                        <option value="Breakfast">
+                            Breakfast
+                        </option>
+
+                        <option value="Lunch">
+                            Lunch
+                        </option>
+
+                        <option value="Dinner">
+                            Dinner
+                        </option>
+
+                        <option value="Snack">
+                            Snack
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- FOOD -->
+
+                <div class="form-group">
+
+                    <label for="food">
+                        Food
+                    </label>
+
+                    <select
+                        id="food"
+                        name="food"
+                        required
+                    >
+
+                        <option value="">
+                            Select a food
+                        </option>
+
+                        {% for food in foods %}
+
+                        <option value="{{ food['name']|lower }}">
+                            {{ food['name'] }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- QUANTITY -->
+
+                <div class="form-group">
+
+                    <label for="quantity">
+                        Quantity
+                    </label>
+
+                    <div class="quantity-input">
+
+                        <input
+                            type="number"
+                            id="quantity"
+                            name="quantity"
+                            min="0.1"
+                            step="0.1"
+                            value="1"
+                            required
+                        >
+
+                        <span>
+                            servings
+                        </span>
+
+                    </div>
+
+                    <small class="form-hint">
+                        Example: 1, 1.5 or 2 servings.
+                    </small>
+
+                </div>
+
+
+
+                <!-- SUBMIT -->
+
+                <button
+                    type="submit"
+                    class="btn primary form-submit"
+                >
+
+                    Add meal
+                    →
+
+                </button>
+
+
+            </form>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             CUSTOM FOOD
+        ================================================== -->
+
+        <section class="form-card custom-food-card">
+
+
+            <div class="card-heading">
+
+                <div>
+
+                    <span class="card-label">
+                        NOT IN THE DATABASE?
+                    </span>
+
+                    <h2>
+                        Add your own food.
+                    </h2>
+
+                </div>
+
+                <span class="card-number">
+                    02
+                </span>
+
+            </div>
+
+
+            <p class="card-description">
+
+                Can't find what you ate? Add the nutrition
+                information once and it will be available
+                in your personal food database.
+
+            </p>
+
+
+
+            <form
+                method="POST"
+                action="{{ url_for('add_food') }}"
             >
-        </label>
 
-        <label>
-            Calories (kcal)
-            <input
-                name="calories"
-                type="number"
-                min="0"
-                step="0.1"
-                required
-            >
-        </label>
 
-        <label>
-            Protein (g)
-            <input
-                name="protein"
-                type="number"
-                min="0"
-                step="0.1"
-                required
-            >
-        </label>
+                <!-- FOOD NAME -->
 
-        <label>
-            Carbohydrates (g)
-            <input
-                name="carbs"
-                type="number"
-                min="0"
-                step="0.1"
-                required
-            >
-        </label>
+                <div class="form-group">
 
-        <label>
-            Fat (g)
-            <input
-                name="fat"
-                type="number"
-                min="0"
-                step="0.1"
-                required
-            >
-        </label>
+                    <label for="custom-name">
+                        Food name
+                    </label>
 
-        <button class="btn primary" type="submit">
-            + Save Custom Food
-        </button>
+                    <input
+                        type="text"
+                        id="custom-name"
+                        name="name"
+                        placeholder="e.g. Homemade pasta"
+                        required
+                    >
 
-    </form>
+                </div>
+
+
+
+                <!-- CALORIES -->
+
+                <div class="form-group">
+
+                    <label for="custom-calories">
+                        Calories
+                        <span>(per serving)</span>
+                    </label>
+
+                    <input
+                        type="number"
+                        id="custom-calories"
+                        name="calories"
+                        min="0"
+                        step="0.1"
+                        placeholder="e.g. 350"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- MACROS -->
+
+                <div class="custom-macro-grid">
+
+
+                    <div class="form-group">
+
+                        <label for="custom-protein">
+                            Protein
+                            <span>(g)</span>
+                        </label>
+
+                        <input
+                            type="number"
+                            id="custom-protein"
+                            name="protein"
+                            min="0"
+                            step="0.1"
+                            placeholder="0"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="custom-carbs">
+                            Carbs
+                            <span>(g)</span>
+                        </label>
+
+                        <input
+                            type="number"
+                            id="custom-carbs"
+                            name="carbs"
+                            min="0"
+                            step="0.1"
+                            placeholder="0"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="custom-fat">
+                            Fat
+                            <span>(g)</span>
+                        </label>
+
+                        <input
+                            type="number"
+                            id="custom-fat"
+                            name="fat"
+                            min="0"
+                            step="0.1"
+                            placeholder="0"
+                            required
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- SUBMIT -->
+
+                <button
+                    type="submit"
+                    class="btn secondary form-submit"
+                >
+
+                    Add to my food database
+                    +
+
+                </button>
+
+
+            </form>
+
+
+        </section>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         INFO
+    ====================================================== -->
+
+    <div class="add-meal-info">
+
+
+        <div class="info-icon">
+            ✦
+        </div>
+
+
+        <div>
+
+            <strong>
+                How nutrition is calculated
+            </strong>
+
+            <p>
+                MealMatrix stores nutrition information
+                per serving. When you enter your quantity,
+                the calories, protein, carbohydrates and
+                fat are automatically calculated for you.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
 </div>
 
 {% endblock %}
