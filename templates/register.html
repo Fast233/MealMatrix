@@ -1,72 +1,257 @@
+```html
 {% extends 'base.html' %}
 
 {% block content %}
 
 <div class="auth-page">
 
+
+    <!-- =====================================================
+         LEFT SIDE — BRAND / INTRO
+    ====================================================== -->
+
+    <div class="auth-intro">
+
+        <span class="eyebrow">
+            START YOUR JOURNEY
+        </span>
+
+
+        <h1>
+            Build a better
+            relationship with
+            your food.
+        </h1>
+
+
+        <p>
+            Create your MealMatrix account and start
+            turning everyday meals into useful information.
+        </p>
+
+
+        <div class="auth-points">
+
+
+            <div class="auth-point">
+
+                <span>
+                    ✓
+                </span>
+
+                <div>
+
+                    <strong>
+                        Track what you eat
+                    </strong>
+
+                    <small>
+                        Log meals in seconds.
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="auth-point">
+
+                <span>
+                    ✓
+                </span>
+
+                <div>
+
+                    <strong>
+                        Understand your nutrition
+                    </strong>
+
+                    <small>
+                        See calories and macros at a glance.
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="auth-point">
+
+                <span>
+                    ✓
+                </span>
+
+                <div>
+
+                    <strong>
+                        Discover your patterns
+                    </strong>
+
+                    <small>
+                        Your food history becomes meaningful over time.
+                    </small>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         RIGHT SIDE — REGISTER FORM
+    ====================================================== -->
+
     <div class="auth-card">
 
+
         <div class="auth-header">
-            <span class="auth-label">MEALMATRIX</span>
-            <h2>Create your account</h2>
+
+
+            <span class="auth-label">
+                MEALMATRIX ACCOUNT
+            </span>
+
+
+            <h2>
+                Create your account
+            </h2>
+
+
             <p>
-                Start tracking your meals and understanding your nutrition.
+                It only takes a minute to get started.
             </p>
+
+
         </div>
+
+
 
         <form method="POST">
 
-            <label for="username">Username</label>
+
+            <!-- USERNAME -->
+
+            <label for="username">
+                Username
+            </label>
+
+
             <input
                 type="text"
                 id="username"
                 name="username"
                 placeholder="Enter your username"
+                autocomplete="username"
                 required
             >
 
-            <label for="email">Email</label>
+
+
+            <!-- EMAIL -->
+
+            <label for="email">
+                Email address
+            </label>
+
+
             <input
                 type="email"
                 id="email"
                 name="email"
-                placeholder="Enter your email"
+                placeholder="you@example.com"
+                autocomplete="email"
                 required
             >
 
-            <label for="password">Password</label>
+
+
+            <!-- PASSWORD -->
+
+            <label for="password">
+                Password
+            </label>
+
+
             <input
                 type="password"
                 id="password"
                 name="password"
                 placeholder="Create a password"
+                autocomplete="new-password"
+                minlength="8"
                 required
             >
 
-            <label for="confirm_password">Confirm Password</label>
+
+            <small class="form-hint">
+                Use at least 8 characters.
+            </small>
+
+
+
+            <!-- CONFIRM PASSWORD -->
+
+            <label for="confirm_password">
+                Confirm password
+            </label>
+
+
             <input
                 type="password"
                 id="confirm_password"
                 name="confirm_password"
-                placeholder="Re-enter your password"
+                placeholder="Enter your password again"
+                autocomplete="new-password"
+                minlength="8"
                 required
             >
 
-            <button type="submit" class="btn primary auth-btn">
-                Create Account
+
+
+            <!-- SUBMIT -->
+
+            <button
+                type="submit"
+                class="btn primary auth-btn"
+            >
+
+                Create my account
+                →
+
             </button>
+
 
         </form>
 
+
+
+        <!-- LOGIN LINK -->
+
         <div class="auth-footer">
+
             <p>
+
                 Already have an account?
-                <a href="{{ url_for('login') }}">Log in</a>
+
+                <a href="{{ url_for('login') }}">
+                    Sign in
+                </a>
+
             </p>
+
         </div>
 
+
     </div>
+
 
 </div>
 
 {% endblock %}
+```
