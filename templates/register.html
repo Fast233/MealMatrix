@@ -1,4 +1,3 @@
-```html
 {% extends 'base.html' %}
 
 {% block content %}
@@ -7,7 +6,7 @@
 
 
     <!-- =====================================================
-         LEFT SIDE — BRAND / INTRO
+         LEFT SIDE — INTRO
     ====================================================== -->
 
     <div class="auth-intro">
@@ -33,6 +32,8 @@
         <div class="auth-points">
 
 
+            <!-- POINT 1 -->
+
             <div class="auth-point">
 
                 <span>
@@ -46,13 +47,15 @@
                     </strong>
 
                     <small>
-                        Log meals in seconds.
+                        Log your meals in seconds.
                     </small>
 
                 </div>
 
             </div>
 
+
+            <!-- POINT 2 -->
 
             <div class="auth-point">
 
@@ -75,6 +78,8 @@
             </div>
 
 
+            <!-- POINT 3 -->
+
             <div class="auth-point">
 
                 <span>
@@ -88,7 +93,7 @@
                     </strong>
 
                     <small>
-                        Your food history becomes meaningful over time.
+                        Your food history becomes more useful over time.
                     </small>
 
                 </div>
@@ -110,8 +115,9 @@
     <div class="auth-card">
 
 
-        <div class="auth-header">
+        <!-- HEADER -->
 
+        <div class="auth-header">
 
             <span class="auth-label">
                 MEALMATRIX ACCOUNT
@@ -124,30 +130,32 @@
 
 
             <p>
-                It only takes a minute to get started.
+                Start with the basics. We'll personalise
+                your MealMatrix experience next.
             </p>
-
 
         </div>
 
 
 
+        <!-- FORM -->
+
         <form method="POST">
 
 
-            <!-- USERNAME -->
+            <!-- NAME -->
 
-            <label for="username">
-                Username
+            <label for="name">
+                Your name
             </label>
 
 
             <input
                 type="text"
-                id="username"
-                name="username"
-                placeholder="Enter your username"
-                autocomplete="username"
+                id="name"
+                name="name"
+                placeholder="Enter your name"
+                autocomplete="name"
                 required
             >
 
@@ -231,7 +239,7 @@
 
 
 
-        <!-- LOGIN LINK -->
+        <!-- LOGIN -->
 
         <div class="auth-footer">
 
@@ -254,4 +262,3 @@
 </div>
 
 {% endblock %}
-```
