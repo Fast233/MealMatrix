@@ -1,1 +1,366 @@
-{% extends 'base.html' %}{% block content %}<form class="search" method="get"><input name="q" value="{{ query }}" placeholder="Search your meals..."><button class="btn primary">Search</button></form><div class="section-head"><h3>Meal history</h3><span>{{ meals|length }} record(s)</span></div><div class="panel">{% if meals %}<table><thead><tr><th>Date</th><th>Meal</th><th>Food</th><th>Calories</th><th></th></tr></thead><tbody>{% for m in meals %}<tr><td>{{ m.date }}</td><td><span class="pill">{{ m.meal_type }}</span></td><td>{{ m.food_item }}</td><td>{{ m.calories }} kcal</td><td><form method="post" action="{{ url_for('delete_meal', meal_id=m.meal_id) }}"><button class="delete">Delete</button></form></td></tr>{% endfor %}</tbody></table>{% else %}<div class="empty">No matching meals.</div>{% endif %}</div>{% endblock %}
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="meals-page">
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <div class="page-header">
+
+        <div>
+
+            <span class="eyebrow">
+                YOUR HISTORY
+            </span>
+
+            <h1>
+                Meal history
+            </h1>
+
+            <p>
+                Review everything you've logged in MealMatrix.
+            </p>
+
+        </div>
+
+
+        <a
+            href="{{ url_for('add_meal') }}"
+            class="btn primary"
+        >
+            + Log a meal
+        </a>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         SEARCH
+    ====================================================== -->
+
+    <section class="meal-search-card">
+
+        <form
+            method="GET"
+            action="{{ url_for('meals') }}"
+            class="meal-search-form"
+        >
+
+            <div class="search-input-wrap">
+
+                <span>
+                    🔍
+                </span>
+
+                <input
+                    type="search"
+                    name="q"
+                    value="{{ query }}"
+                    placeholder="Search your meals..."
+                    aria-label="Search meals"
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn primary"
+            >
+                Search
+            </button>
+
+
+            {% if query %}
+
+            <a
+                href="{{ url_for('meals') }}"
+                class="btn secondary"
+            >
+                Clear
+            </a>
+
+            {% endif %}
+
+        </form>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         RESULTS HEADER
+    ====================================================== -->
+
+    <div class="results-header">
+
+        <div>
+
+            <span class="card-label">
+                MEAL LOG
+            </span>
+
+            <h2>
+
+                {% if query %}
+                    Results for "{{ query }}"
+                {% else %}
+                    Your logged meals
+                {% endif %}
+
+            </h2>
+
+        </div>
+
+
+        <span class="result-count">
+            {{ meals|length }}
+            {% if meals|length == 1 %}
+                meal
+            {% else %}
+                meals
+            {% endif %}
+        </span>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         MEALS
+    ====================================================== -->
+
+    {% if meals %}
+
+    <section class="meal-history-list">
+
+
+        {% for meal in meals %}
+
+        <div class="meal-history-item">
+
+
+            <!-- MEAL TYPE -->
+
+            <div class="history-meal-icon">
+
+                {{ meal["meal_type"][0] }}
+
+            </div>
+
+
+
+            <!-- MAIN INFORMATION -->
+
+            <div class="history-meal-info">
+
+                <strong>
+                    {{ meal["food_item"] }}
+                </strong>
+
+                <div class="history-meta">
+
+                    <span>
+                        {{ meal["meal_type"] }}
+                    </span>
+
+                    <span>
+                        {{ meal["date"] }}
+                    </span>
+
+                    <span>
+                        {{ meal["quantity"] }} serving
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- NUTRITION -->
+
+            <div class="history-nutrition">
+
+
+                <div>
+
+                    <strong>
+                        {{ meal["calories"]|round(0)|int }}
+                    </strong>
+
+                    <small>
+                        kcal
+                    </small>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        {{ meal["protein"]|round(1) }}g
+                    </strong>
+
+                    <small>
+                        protein
+                    </small>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        {{ meal["carbs"]|round(1) }}g
+                    </strong>
+
+                    <small>
+                        carbs
+                    </small>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        {{ meal["fat"]|round(1) }}g
+                    </strong>
+
+                    <small>
+                        fat
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- DELETE -->
+
+            <form
+                method="POST"
+                action="{{ url_for('delete_meal', meal_id=meal['meal_id']) }}"
+            >
+
+                <button
+                    type="submit"
+                    class="meal-delete"
+                    title="Delete meal"
+                    onclick="return confirm('Remove this meal from your history?');"
+                >
+                    ×
+                </button>
+
+            </form>
+
+
+        </div>
+
+        {% endfor %}
+
+
+    </section>
+
+
+    {% else %}
+
+
+    <!-- =====================================================
+         EMPTY STATE
+    ====================================================== -->
+
+    <section class="empty-history">
+
+
+        <div class="empty-history-icon">
+            +
+        </div>
+
+
+        {% if query %}
+
+            <h2>
+                No meals found.
+            </h2>
+
+            <p>
+                We couldn't find any logged meals matching
+                "{{ query }}".
+            </p>
+
+
+            <a
+                href="{{ url_for('meals') }}"
+                class="btn secondary"
+            >
+                View all meals
+            </a>
+
+        {% else %}
+
+            <h2>
+                Your meal history is empty.
+            </h2>
+
+            <p>
+                Start recording your meals and they'll
+                appear here.
+            </p>
+
+
+            <a
+                href="{{ url_for('add_meal') }}"
+                class="btn primary"
+            >
+                Log your first meal
+                →
+            </a>
+
+        {% endif %}
+
+
+    </section>
+
+
+    {% endif %}
+
+
+
+    <!-- =====================================================
+         FOOTER ACTION
+    ====================================================== -->
+
+    {% if meals %}
+
+    <div class="history-footer">
+
+        <p>
+            Your meal history helps MealMatrix identify
+            patterns in your eating habits.
+        </p>
+
+
+        <a
+            href="{{ url_for('habits') }}"
+            class="text-link"
+        >
+            Explore food habits →
+        </a>
+
+    </div>
+
+    {% endif %}
+
+
+</div>
+
+{% endblock %}
