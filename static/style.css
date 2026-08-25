@@ -3341,3 +3341,32 @@ main {
     }
 
 }
+/* =========================================================
+   PAGE ALIGNMENT FIX
+   ========================================================= */
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    transform: none !important;
+    rotate: none !important;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+/* Prevent accidental transforms from affecting the page */
+.landing-shell,
+.auth-shell,
+.auth-card,
+.profile-shell,
+.profile-card,
+.dashboard-shell,
+.dashboard-card {
+    transform: none !important;
+    rotate: none !important;
+}
