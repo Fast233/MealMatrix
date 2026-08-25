@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="en">
 
@@ -22,7 +23,9 @@
 <div class="landing-shell">
 
 
-    <!-- NAVIGATION -->
+    <!-- =====================================================
+         NAVIGATION
+    ====================================================== -->
 
     <header class="landing-nav">
 
@@ -52,12 +55,17 @@
 
             <a href="{{ url_for('login') }}"
                class="nav-login">
+
                 Sign in
+
             </a>
+
 
             <a href="{{ url_for('register') }}"
                class="btn primary">
+
                 Get started
+
             </a>
 
         </div>
@@ -65,28 +73,37 @@
     </header>
 
 
-    <!-- HERO -->
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
 
     <main>
+
 
         <section class="landing-hero">
 
 
+            <!-- LEFT SIDE -->
+
             <div class="landing-copy">
 
+
                 <span class="eyebrow">
+
                     YOUR FOOD. YOUR PATTERNS. YOUR DATA.
+
                 </span>
 
 
                 <h1>
 
-                    Understand your food.
+                    Your food has patterns.
 
                     <br>
 
                     <span>
-                        Build better patterns.
+                        MealMatrix helps you see them.
                     </span>
 
                 </h1>
@@ -94,19 +111,20 @@
 
                 <p>
 
-                    MealMatrix helps you record your meals,
-                    understand your nutrition and discover
-                    patterns in the foods you actually eat.
+                    Record what you eat, understand your
+                    nutrition and discover the habits hidden
+                    in your everyday meals.
 
                 </p>
 
 
                 <div class="landing-actions">
 
+
                     <a class="btn primary large"
                        href="{{ url_for('register') }}">
 
-                        Start tracking
+                        Start your journey
                         →
 
                     </a>
@@ -136,10 +154,14 @@
 
                 </div>
 
+
             </div>
 
 
-            <!-- VISUAL -->
+
+            <!-- =================================================
+                 PRODUCT PREVIEW
+            ================================================== -->
 
             <div class="landing-visual">
 
@@ -159,23 +181,26 @@
                             </small>
 
                             <strong>
-                                Today's nutrition
+                                Today's overview
                             </strong>
 
                         </div>
 
 
                         <span class="preview-live">
-                            ● LIVE
+                            ● TODAY
                         </span>
 
                     </div>
 
 
+
+                    <!-- CALORIES -->
+
                     <div class="preview-calories">
 
                         <small>
-                            CALORIES
+                            CALORIES RECORDED
                         </small>
 
                         <strong>
@@ -183,11 +208,14 @@
                         </strong>
 
                         <span>
-                            kcal recorded
+                            kcal today
                         </span>
 
                     </div>
 
+
+
+                    <!-- MACROS -->
 
                     <div class="preview-stats">
 
@@ -203,7 +231,9 @@
                             </b>
 
                             <div class="preview-bar">
+
                                 <i style="width:72%;"></i>
+
                             </div>
 
                         </div>
@@ -220,7 +250,9 @@
                             </b>
 
                             <div class="preview-bar">
+
                                 <i style="width:82%;"></i>
+
                             </div>
 
                         </div>
@@ -237,7 +269,9 @@
                             </b>
 
                             <div class="preview-bar">
+
                                 <i style="width:54%;"></i>
+
                             </div>
 
                         </div>
@@ -246,7 +280,56 @@
                     </div>
 
 
+
+                    <!-- PATTERN CARD -->
+
+                    <div class="preview-pattern">
+
+
+                        <div class="preview-section-title">
+
+                            <span>
+                                YOUR PATTERN
+                            </span>
+
+                            <small>
+                                THIS WEEK
+                            </small>
+
+                        </div>
+
+
+                        <div class="pattern-highlight">
+
+                            <span class="pattern-icon">
+                                ✦
+                            </span>
+
+
+                            <div>
+
+                                <b>
+                                    Consistency is improving
+                                </b>
+
+                                <p>
+                                    You logged meals on
+                                    5 of the last 7 days.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- RECENT MEALS -->
+
                     <div class="preview-meals">
+
 
                         <div class="preview-section-title">
 
@@ -311,17 +394,22 @@
 
                         </div>
 
+
                     </div>
 
 
                 </div>
 
 
+
+                <!-- FLOATING INSIGHT -->
+
                 <div class="floating-card">
 
                     <span>
                         ✦
                     </span>
+
 
                     <div>
 
@@ -340,10 +428,14 @@
 
             </div>
 
+
         </section>
 
 
-        <!-- FEATURES -->
+
+        <!-- =====================================================
+             FEATURES
+        ====================================================== -->
 
         <section class="landing-features">
 
@@ -351,24 +443,31 @@
             <div class="feature-intro">
 
                 <span class="eyebrow">
-                    EVERYTHING IN ONE PLACE
+                    BUILT AROUND YOUR HABITS
                 </span>
+
 
                 <h2>
                     More than a food diary.
                 </h2>
 
+
                 <p>
+
                     MealMatrix turns your everyday meal
-                    records into information you can actually
-                    understand.
+                    records into information you can
+                    actually understand.
+
                 </p>
 
             </div>
 
 
+
             <div class="feature-grid">
 
+
+                <!-- FEATURE 1 -->
 
                 <div class="feature-card">
 
@@ -376,18 +475,25 @@
                         ＋
                     </span>
 
+
                     <h3>
                         Log meals
                     </h3>
 
+
                     <p>
+
                         Record foods and serving sizes while
-                        MealMatrix calculates the nutrition
-                        automatically.
+                        MealMatrix calculates calories,
+                        protein, carbohydrates and fat.
+
                     </p>
 
                 </div>
 
+
+
+                <!-- FEATURE 2 -->
 
                 <div class="feature-card">
 
@@ -395,17 +501,25 @@
                         ▥
                     </span>
 
+
                     <h3>
-                        Track progress
+                        Understand nutrition
                     </h3>
 
+
                     <p>
-                        Review your recent nutrition and see
-                        how your logged meals change over time.
+
+                        See your daily nutrition at a glance
+                        and compare your intake with the goals
+                        you set.
+
                     </p>
 
                 </div>
 
+
+
+                <!-- FEATURE 3 -->
 
                 <div class="feature-card">
 
@@ -413,13 +527,18 @@
                         ✦
                     </span>
 
+
                     <h3>
-                        Find patterns
+                        Discover patterns
                     </h3>
 
+
                     <p>
-                        Explore your food habits and discover
-                        which foods appear most often in your log.
+
+                        See which foods appear most often and
+                        understand the habits forming around
+                        your meals.
+
                     </p>
 
                 </div>
@@ -427,12 +546,112 @@
 
             </div>
 
+
         </section>
 
 
-        <!-- CTA -->
+
+        <!-- =====================================================
+             HOW IT WORKS
+        ====================================================== -->
+
+        <section class="landing-process">
+
+
+            <div class="feature-intro">
+
+                <span class="eyebrow">
+                    HOW IT WORKS
+                </span>
+
+
+                <h2>
+                    Start with what you already eat.
+                </h2>
+
+
+                <p>
+
+                    No complicated setup. Build your profile,
+                    record your meals and let your data build
+                    over time.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="process-grid">
+
+
+                <div class="process-step">
+
+                    <span>
+                        01
+                    </span>
+
+                    <h3>
+                        Build your profile
+                    </h3>
+
+                    <p>
+                        Tell MealMatrix about your goals,
+                        routine and food preferences.
+                    </p>
+
+                </div>
+
+
+                <div class="process-step">
+
+                    <span>
+                        02
+                    </span>
+
+                    <h3>
+                        Log your meals
+                    </h3>
+
+                    <p>
+                        Choose a food, enter a serving and
+                        let MealMatrix calculate the nutrition.
+                    </p>
+
+                </div>
+
+
+                <div class="process-step">
+
+                    <span>
+                        03
+                    </span>
+
+                    <h3>
+                        Find your patterns
+                    </h3>
+
+                    <p>
+                        As your data grows, MealMatrix helps
+                        you understand your eating habits.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             FINAL CTA
+        ====================================================== -->
 
         <section class="landing-cta">
+
 
             <div>
 
@@ -440,12 +659,14 @@
                     READY TO START?
                 </span>
 
+
                 <h2>
                     Your meals tell a story.
                 </h2>
 
+
                 <p>
-                    Start recording them today.
+                    Start recording yours today.
                 </p>
 
             </div>
@@ -459,15 +680,20 @@
 
             </a>
 
+
         </section>
 
 
     </main>
 
 
-    <!-- FOOTER -->
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
 
     <footer class="landing-footer">
+
 
         <div>
 
@@ -486,6 +712,7 @@
             Python + Flask web application
         </span>
 
+
     </footer>
 
 
@@ -495,3 +722,4 @@
 </body>
 
 </html>
+```
