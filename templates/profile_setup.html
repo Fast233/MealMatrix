@@ -2,277 +2,765 @@
 
 {% block content %}
 
-<div class="hero compact">
-
-    <div>
-        <span>WELCOME TO MEALMATRIX</span>
-
-        <h2>Let's build your profile.</h2>
-
-        <p>
-            Tell us a little about yourself so MealMatrix
-            can understand your eating patterns and personalise
-            your experience.
-        </p>
-    </div>
-
-</div>
+<div class="onboarding-page">
 
 
-<div class="form-card">
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
 
-    <div class="section-heading">
+    <div class="onboarding-header">
 
-        <h3>About You</h3>
+        <span class="eyebrow">
+            MEALMATRIX SETUP
+        </span>
+
+        <h1>
+            Let's personalise your experience.
+        </h1>
 
         <p>
-            These details help MealMatrix understand your
-            nutrition needs.
+            A few quick details will help MealMatrix
+            understand your goals, routine and food habits.
         </p>
 
     </div>
 
 
-    <form method="POST">
 
-        <!-- AGE -->
+    <!-- =====================================================
+         PROGRESS
+    ====================================================== -->
 
-        <label for="age">
-            Age
-        </label>
+    <div class="onboarding-progress">
 
-        <input
-            type="number"
-            id="age"
-            name="age"
-            min="1"
-            placeholder="Enter your age"
-            required
-        >
+        <div class="progress-step active"
+             id="progress-1">
 
+            <span>
+                01
+            </span>
 
-        <!-- HEIGHT -->
+            <small>
+                About you
+            </small>
 
-        <label for="height">
-            Height (cm)
-        </label>
+        </div>
 
-        <input
-            type="number"
-            id="height"
-            name="height"
-            min="1"
-            step="0.1"
-            placeholder="Enter your height"
-            required
-        >
 
+        <div class="progress-line"></div>
 
-        <!-- WEIGHT -->
 
-        <label for="weight">
-            Weight (kg)
-        </label>
+        <div class="progress-step"
+             id="progress-2">
 
-        <input
-            type="number"
-            id="weight"
-            name="weight"
-            min="1"
-            step="0.1"
-            placeholder="Enter your weight"
-            required
-        >
+            <span>
+                02
+            </span>
 
+            <small>
+                Your goal
+            </small>
 
-        <!-- GOAL -->
+        </div>
 
-        <label for="goal">
-            What is your main goal?
-        </label>
 
-        <select
-            id="goal"
-            name="goal"
-            required
-        >
+        <div class="progress-line"></div>
 
-            <option value="">
-                Select your goal
-            </option>
 
-            <option value="Maintain weight">
-                Maintain weight
-            </option>
+        <div class="progress-step"
+             id="progress-3">
 
-            <option value="Lose weight">
-                Lose weight
-            </option>
+            <span>
+                03
+            </span>
 
-            <option value="Gain weight">
-                Gain weight
-            </option>
+            <small>
+                Your routine
+            </small>
 
-            <option value="Build muscle">
-                Build muscle
-            </option>
+        </div>
 
-            <option value="Improve nutrition">
-                Improve nutrition
-            </option>
+    </div>
 
-        </select>
 
 
-        <!-- ACTIVITY LEVEL -->
+    <!-- =====================================================
+         FORM
+    ====================================================== -->
 
-        <label for="activity_level">
-            How active are you?
-        </label>
+    <div class="onboarding-card">
 
-        <select
-            id="activity_level"
-            name="activity_level"
-            required
-        >
 
-            <option value="">
-                Select your activity level
-            </option>
+        <form method="POST"
+              id="profileForm">
 
-            <option value="Low">
-                Low
-            </option>
 
-            <option value="Moderate">
-                Moderate
-            </option>
 
-            <option value="High">
-                High
-            </option>
+            <!-- =================================================
+                 STEP 1 — ABOUT YOU
+            ================================================== -->
 
-            <option value="Very High">
-                Very High
-            </option>
+            <div class="onboarding-step active"
+                 id="step-1">
 
-        </select>
 
+                <div class="step-heading">
 
-        <!-- FOOD PREFERENCE -->
+                    <span>
+                        STEP 01
+                    </span>
 
-        <label for="food_preference">
-            Food Preference
-        </label>
+                    <h2>
+                        About you
+                    </h2>
 
-        <select
-            id="food_preference"
-            name="food_preference"
-            required
-        >
+                    <p>
+                        Start with a few basic details.
+                    </p>
 
-            <option value="">
-                Select your preference
-            </option>
+                </div>
 
-            <option value="No preference">
-                No preference
-            </option>
 
-            <option value="Vegetarian">
-                Vegetarian
-            </option>
 
-            <option value="Non-vegetarian">
-                Non-vegetarian
-            </option>
+                <div class="form-grid">
 
-            <option value="Vegan">
-                Vegan
-            </option>
 
-        </select>
+                    <!-- AGE -->
 
+                    <div class="form-group">
 
-        <!-- MEALS PER DAY -->
+                        <label for="age">
+                            Age
+                        </label>
 
-        <label for="meals_per_day">
-            How many meals do you usually have per day?
-        </label>
+                        <input
+                            type="number"
+                            id="age"
+                            name="age"
+                            min="1"
+                            max="120"
+                            placeholder="e.g. 17"
+                            required
+                        >
 
-        <input
-            type="number"
-            id="meals_per_day"
-            name="meals_per_day"
-            min="1"
-            max="10"
-            value="3"
-            required
-        >
+                    </div>
 
 
-        <!-- MEAL TIMES -->
 
-        <label for="meal_times">
-            Usual Meal Times
-        </label>
+                    <!-- HEIGHT -->
 
-        <input
-            type="text"
-            id="meal_times"
-            name="meal_times"
-            placeholder="e.g. 8 AM, 1 PM, 8 PM"
-        >
+                    <div class="form-group">
 
+                        <label for="height">
+                            Height
+                            <span>(cm)</span>
+                        </label>
 
-        <!-- ACTIVITY FREQUENCY -->
+                        <input
+                            type="number"
+                            id="height"
+                            name="height"
+                            min="1"
+                            step="0.1"
+                            placeholder="e.g. 175"
+                            required
+                        >
 
-        <label for="activity_frequency">
-            How often are you physically active?
-        </label>
+                    </div>
 
-        <select
-            id="activity_frequency"
-            name="activity_frequency"
-            required
-        >
 
-            <option value="">
-                Select frequency
-            </option>
 
-            <option value="Rarely">
-                Rarely
-            </option>
+                    <!-- WEIGHT -->
 
-            <option value="1-2 days a week">
-                1–2 days a week
-            </option>
+                    <div class="form-group full-width">
 
-            <option value="3-4 days a week">
-                3–4 days a week
-            </option>
+                        <label for="weight">
+                            Weight
+                            <span>(kg)</span>
+                        </label>
 
-            <option value="5-6 days a week">
-                5–6 days a week
-            </option>
+                        <input
+                            type="number"
+                            id="weight"
+                            name="weight"
+                            min="1"
+                            step="0.1"
+                            placeholder="e.g. 70"
+                            required
+                        >
 
-            <option value="Every day">
-                Every day
-            </option>
+                    </div>
 
-        </select>
 
+                </div>
 
-        <button
-            type="submit"
-            class="btn primary auth-btn"
-        >
-            Complete Profile
-        </button>
 
-    </form>
+
+                <div class="step-note">
+
+                    <span>✦</span>
+
+                    <p>
+                        These details help MealMatrix organise
+                        your nutrition information. They are
+                        not used to judge your appearance.
+                    </p>
+
+                </div>
+
+
+
+                <button
+                    type="button"
+                    class="btn primary onboarding-next"
+                    onclick="nextStep(2)"
+                >
+
+                    Continue
+                    →
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 STEP 2 — GOAL
+            ================================================== -->
+
+            <div class="onboarding-step"
+                 id="step-2">
+
+
+                <div class="step-heading">
+
+                    <span>
+                        STEP 02
+                    </span>
+
+                    <h2>
+                        What are you working towards?
+                    </h2>
+
+                    <p>
+                        Choose the goal that best describes
+                        what you want from MealMatrix.
+                    </p>
+
+                </div>
+
+
+
+                <div class="goal-options">
+
+
+                    <!-- MAINTAIN -->
+
+                    <label class="goal-option">
+
+                        <input
+                            type="radio"
+                            name="goal"
+                            value="Maintain weight"
+                            required
+                        >
+
+                        <div>
+
+                            <strong>
+                                Maintain weight
+                            </strong>
+
+                            <span>
+                                Keep my current routine consistent.
+                            </span>
+
+                        </div>
+
+                    </label>
+
+
+
+                    <!-- IMPROVE -->
+
+                    <label class="goal-option">
+
+                        <input
+                            type="radio"
+                            name="goal"
+                            value="Improve nutrition"
+                        >
+
+                        <div>
+
+                            <strong>
+                                Improve nutrition
+                            </strong>
+
+                            <span>
+                                Understand and improve my eating habits.
+                            </span>
+
+                        </div>
+
+                    </label>
+
+
+
+                    <!-- BUILD -->
+
+                    <label class="goal-option">
+
+                        <input
+                            type="radio"
+                            name="goal"
+                            value="Build muscle"
+                        >
+
+                        <div>
+
+                            <strong>
+                                Build muscle
+                            </strong>
+
+                            <span>
+                                Support my training and nutrition.
+                            </span>
+
+                        </div>
+
+                    </label>
+
+
+
+                    <!-- GAIN -->
+
+                    <label class="goal-option">
+
+                        <input
+                            type="radio"
+                            name="goal"
+                            value="Gain weight"
+                        >
+
+                        <div>
+
+                            <strong>
+                                Gain weight
+                            </strong>
+
+                            <span>
+                                Support a gradual increase in intake.
+                            </span>
+
+                        </div>
+
+                    </label>
+
+
+
+                    <!-- LOSE -->
+
+                    <label class="goal-option">
+
+                        <input
+                            type="radio"
+                            name="goal"
+                            value="Lose weight"
+                        >
+
+                        <div>
+
+                            <strong>
+                                Lose weight
+                            </strong>
+
+                            <span>
+                                Work towards a sustainable nutrition routine.
+                            </span>
+
+                        </div>
+
+                    </label>
+
+
+                </div>
+
+
+
+                <div class="onboarding-actions">
+
+
+                    <button
+                        type="button"
+                        class="btn secondary"
+                        onclick="nextStep(1)"
+                    >
+
+                        ← Back
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="btn primary"
+                        onclick="nextStep(3)"
+                    >
+
+                        Continue
+                        →
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 STEP 3 — ROUTINE
+            ================================================== -->
+
+            <div class="onboarding-step"
+                 id="step-3">
+
+
+                <div class="step-heading">
+
+                    <span>
+                        STEP 03
+                    </span>
+
+                    <h2>
+                        Tell us about your routine.
+                    </h2>
+
+                    <p>
+                        This helps MealMatrix understand
+                        how your meals fit into your day.
+                    </p>
+
+                </div>
+
+
+
+                <div class="form-grid">
+
+
+                    <!-- ACTIVITY LEVEL -->
+
+                    <div class="form-group">
+
+                        <label for="activity_level">
+                            Activity level
+                        </label>
+
+                        <select
+                            id="activity_level"
+                            name="activity_level"
+                            required
+                        >
+
+                            <option value="">
+                                Select activity level
+                            </option>
+
+                            <option value="Low">
+                                Low
+                            </option>
+
+                            <option value="Moderate">
+                                Moderate
+                            </option>
+
+                            <option value="High">
+                                High
+                            </option>
+
+                            <option value="Very High">
+                                Very High
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- FOOD PREFERENCE -->
+
+                    <div class="form-group">
+
+                        <label for="food_preference">
+                            Food preference
+                        </label>
+
+                        <select
+                            id="food_preference"
+                            name="food_preference"
+                            required
+                        >
+
+                            <option value="">
+                                Select preference
+                            </option>
+
+                            <option value="No preference">
+                                No preference
+                            </option>
+
+                            <option value="Vegetarian">
+                                Vegetarian
+                            </option>
+
+                            <option value="Non-vegetarian">
+                                Non-vegetarian
+                            </option>
+
+                            <option value="Vegan">
+                                Vegan
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- MEALS PER DAY -->
+
+                    <div class="form-group">
+
+                        <label for="meals_per_day">
+                            Meals per day
+                        </label>
+
+                        <input
+                            type="number"
+                            id="meals_per_day"
+                            name="meals_per_day"
+                            min="1"
+                            max="10"
+                            value="3"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- ACTIVITY FREQUENCY -->
+
+                    <div class="form-group">
+
+                        <label for="activity_frequency">
+                            Activity frequency
+                        </label>
+
+                        <select
+                            id="activity_frequency"
+                            name="activity_frequency"
+                            required
+                        >
+
+                            <option value="">
+                                Select frequency
+                            </option>
+
+                            <option value="Rarely">
+                                Rarely
+                            </option>
+
+                            <option value="1-2 days a week">
+                                1–2 days a week
+                            </option>
+
+                            <option value="3-4 days a week">
+                                3–4 days a week
+                            </option>
+
+                            <option value="5-6 days a week">
+                                5–6 days a week
+                            </option>
+
+                            <option value="Every day">
+                                Every day
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- MEAL TIMES -->
+
+                    <div class="form-group full-width">
+
+                        <label for="meal_times">
+                            Usual meal times
+                            <span>(optional)</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="meal_times"
+                            name="meal_times"
+                            placeholder="e.g. 8 AM, 1 PM, 8 PM"
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="step-note">
+
+                    <span>✦</span>
+
+                    <p>
+                        You can always change these details
+                        later from your profile.
+                    </p>
+
+                </div>
+
+
+
+                <div class="onboarding-actions">
+
+
+                    <button
+                        type="button"
+                        class="btn secondary"
+                        onclick="nextStep(2)"
+                    >
+
+                        ← Back
+
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="btn primary"
+                    >
+
+                        Complete my profile
+                        →
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
 
 </div>
+
+
+
+<!-- =========================================================
+     STEP NAVIGATION JAVASCRIPT
+========================================================== -->
+
+<script>
+
+function nextStep(stepNumber) {
+
+    /*
+     * Hide every onboarding step.
+     */
+
+    document
+        .querySelectorAll(".onboarding-step")
+        .forEach(function(step) {
+
+            step.classList.remove("active");
+
+        });
+
+
+    /*
+     * Show selected step.
+     */
+
+    document
+        .getElementById("step-" + stepNumber)
+        .classList.add("active");
+
+
+    /*
+     * Update progress indicators.
+     */
+
+    document
+        .querySelectorAll(".progress-step")
+        .forEach(function(step) {
+
+            step.classList.remove("active");
+            step.classList.remove("completed");
+
+        });
+
+
+    for (
+        let i = 1;
+        i <= stepNumber;
+        i++
+    ) {
+
+        const progress =
+            document.getElementById(
+                "progress-" + i
+            );
+
+        if (i < stepNumber) {
+
+            progress.classList.add(
+                "completed"
+            );
+
+        } else {
+
+            progress.classList.add(
+                "active"
+            );
+
+        }
+
+    }
+
+
+    /*
+     * Scroll back to the top of the
+     * onboarding card.
+     */
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+</script>
 
 {% endblock %}
