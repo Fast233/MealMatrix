@@ -1,24 +1,395 @@
 {% extends 'base.html' %}
+
 {% block content %}
 
-<form class="search" method="get">
-    <input name="q" value="{{ query }}" placeholder="Search 50+ foods...">
-    <button class="btn primary">Search</button>
-</form>
+<div class="foods-page">
 
-<div class="food-grid">
-    {% for f in foods %}
-    <div class="food">
-        <b>{{ f.name }}</b>
-        <small>
-            {{ "%.0f"|format(f.calories) }} kcal ·
-            P {{ "%.0f"|format(f.protein) }}g ·
-            C {{ "%.0f"|format(f.carbs) }}g ·
-            F {{ "%.0f"|format(f.fat) }}g
-        </small>
-        <a href="{{ url_for('add_meal') }}" class="small-btn">Add meal</a>
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <div class="page-header">
+
+        <div>
+
+            <span class="eyebrow">
+                NUTRITION DATABASE
+            </span>
+
+            <h1>
+                Food database
+            </h1>
+
+            <p>
+                Explore the nutrition information available
+                in your MealMatrix food library.
+            </p>
+
+        </div>
+
+
+        <a
+            href="{{ url_for('add_meal') }}"
+            class="btn primary"
+        >
+            + Add a meal
+        </a>
+
     </div>
-    {% endfor %}
+
+
+
+    <!-- =====================================================
+         SEARCH
+    ====================================================== -->
+
+    <section class="food-search-card">
+
+
+        <form
+            method="GET"
+            action="{{ url_for('foods') }}"
+            class="food-search-form"
+        >
+
+
+            <div class="search-input-wrap">
+
+                <span>
+                    🔍
+                </span>
+
+
+                <input
+                    type="search"
+                    name="q"
+                    value="{{ query }}"
+                    placeholder="Search for a food..."
+                    aria-label="Search food database"
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn primary"
+            >
+                Search
+            </button>
+
+
+            {% if query %}
+
+            <a
+                href="{{ url_for('foods') }}"
+                class="btn secondary"
+            >
+                Clear
+            </a>
+
+            {% endif %}
+
+
+        </form>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         DATABASE SUMMARY
+    ====================================================== -->
+
+    <div class="food-database-summary">
+
+
+        <div>
+
+            <span class="card-label">
+                AVAILABLE FOODS
+            </span>
+
+            <strong>
+                {{ foods|length }}
+            </strong>
+
+        </div>
+
+
+        <div>
+
+            <span class="card-label">
+                SEARCH
+            </span>
+
+            <p>
+
+                {% if query %}
+
+                    Showing results for
+                    <strong>"{{ query }}"</strong>
+
+                {% else %}
+
+                    Browse the full database.
+
+                {% endif %}
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         FOOD TABLE
+    ====================================================== -->
+
+    {% if foods %}
+
+    <section class="food-table-card">
+
+
+        <div class="food-table-header">
+
+            <span>
+                FOOD
+            </span>
+
+            <span>
+                CALORIES
+            </span>
+
+            <span>
+                PROTEIN
+            </span>
+
+            <span>
+                CARBS
+            </span>
+
+            <span>
+                FAT
+            </span>
+
+        </div>
+
+
+
+        <div class="food-table-body">
+
+
+            {% for food in foods %}
+
+            <div class="food-row">
+
+
+                <!-- FOOD -->
+
+                <div class="food-name">
+
+                    <div class="food-avatar">
+                        {{ food["name"][0]|upper }}
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            {{ food["name"] }}
+                        </strong>
+
+                        <small>
+                            Per serving
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CALORIES -->
+
+                <div class="food-value">
+
+                    <strong>
+                        {{ food["calories"]|round(1) }}
+                    </strong>
+
+                    <small>
+                        kcal
+                    </small>
+
+                </div>
+
+
+
+                <!-- PROTEIN -->
+
+                <div class="food-value">
+
+                    <strong>
+                        {{ food["protein"]|round(1) }}g
+                    </strong>
+
+                </div>
+
+
+
+                <!-- CARBS -->
+
+                <div class="food-value">
+
+                    <strong>
+                        {{ food["carbs"]|round(1) }}g
+                    </strong>
+
+                </div>
+
+
+
+                <!-- FAT -->
+
+                <div class="food-value">
+
+                    <strong>
+                        {{ food["fat"]|round(1) }}g
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+            {% endfor %}
+
+
+        </div>
+
+
+    </section>
+
+
+    {% else %}
+
+
+    <!-- =====================================================
+         EMPTY STATE
+    ====================================================== -->
+
+    <section class="empty-foods">
+
+
+        <div class="empty-food-icon">
+            ?
+        </div>
+
+
+        <h2>
+            No foods found.
+        </h2>
+
+
+        <p>
+
+            {% if query %}
+
+                We couldn't find anything matching
+                "{{ query }}".
+
+            {% else %}
+
+                Your food database is currently empty.
+
+            {% endif %}
+
+        </p>
+
+
+        <div class="empty-food-actions">
+
+
+            {% if query %}
+
+            <a
+                href="{{ url_for('foods') }}"
+                class="btn secondary"
+            >
+                View all foods
+            </a>
+
+            {% endif %}
+
+
+            <a
+                href="{{ url_for('add_meal') }}"
+                class="btn primary"
+            >
+                Add a custom food
+                →
+            </a>
+
+
+        </div>
+
+
+    </section>
+
+
+    {% endif %}
+
+
+
+    <!-- =====================================================
+         INFORMATION CARD
+    ====================================================== -->
+
+    <section class="food-info-card">
+
+
+        <div class="food-info-icon">
+            ✦
+        </div>
+
+
+        <div>
+
+            <span class="card-label">
+                YOUR PERSONAL DATABASE
+            </span>
+
+
+            <h2>
+                Can't find a food?
+            </h2>
+
+
+            <p>
+                Add your own food from the Add Meal page.
+                Once saved, it becomes part of your personal
+                MealMatrix database.
+            </p>
+
+
+            <a
+                href="{{ url_for('add_meal') }}"
+                class="text-link"
+            >
+                Add a custom food →
+            </a>
+
+        </div>
+
+
+    </section>
+
+
 </div>
 
 {% endblock %}
