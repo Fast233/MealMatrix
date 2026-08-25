@@ -530,8 +530,10 @@ def register():
 
     if request.method == "POST":
 
-        name = request.form.get(
-            "name",
+        # register.html uses "username"
+        # Database column remains "name"
+        username = request.form.get(
+            "username",
             ""
         ).strip()
 
@@ -550,7 +552,7 @@ def register():
             ""
         )
 
-        if not name or not email or not password:
+        if not username or not email or not password:
 
             flash(
                 "Please complete all required fields.",
@@ -622,7 +624,7 @@ def register():
             VALUES (?, ?, ?, ?)
             """,
             (
-                name,
+                username,
                 email,
                 password_hash,
                 datetime.datetime.now().isoformat()
@@ -646,6 +648,7 @@ def register():
         conn.close()
 
         session.clear()
+
         session["user_id"] = user_id
 
         return redirect(
@@ -713,6 +716,7 @@ def login():
             )
 
         session.clear()
+
         session["user_id"] = user["id"]
 
         profile = get_profile(
